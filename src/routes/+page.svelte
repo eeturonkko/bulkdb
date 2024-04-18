@@ -1,10 +1,11 @@
 <script lang="ts">
 </script>
 
-<div class="text-center">
-	<h1 class="text-2xl font-bold">Bulkdb</h1>
-	<p>
-		Track your bulk data with Bulkdb. Bulkdb is a simple and easy to use tool to track your bulk
-		data.
-	</p>
+<svelte:head>
+	<title>Bulkdb | Home</title>
+</svelte:head>
+
+<div class="text-center tracking-wide">
+	<h1 class="text-3xl font-bold">Bulkdb</h1>
+	<p class="text-lg text-gray-700">Start by adding a new week or add your daily weight</p>
 </div>
