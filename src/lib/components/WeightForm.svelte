@@ -6,7 +6,7 @@
 	import Button from './ui/button/button.svelte';
 </script>
 
-<Card.Root class="mt-8 py-6">
+<Card.Root class="mt-8  py-6">
 	<Card.Content class="space-y-4 text-start">
 		<div class="space-y-2">
 			<Label for="weight">Weight (kg)</Label>
@@ -30,6 +30,6 @@
 			<Label for="date">Date</Label>
 			<Input type="date" />
 		</div>
-		<Button size="lg">Submit</Button>
+		<Button size="lg">Add</Button>
 	</Card.Content>
 </Card.Root>
