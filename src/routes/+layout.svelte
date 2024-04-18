@@ -1,8 +1,10 @@
 <script>
 	import '../app.pcss';
 	import Sidebar from '$lib/components/Sidebar.svelte';
+	import { ModeWatcher } from 'mode-watcher';
 </script>
 
+<ModeWatcher />
 <div class="flex min-h-screen w-full flex-col bg-muted/40">
 	<Sidebar />
 	<main class="container">
