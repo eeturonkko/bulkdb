@@ -10,9 +10,16 @@ export const actions: Actions = {
 		const form = await superValidate(event, zod(newWeekFormSchema));
 		const { week } = form.data;
 		const date = new Date();
-		await db.insert(weeks).values({
-			name: week,
-			createdAt: date
-		});
+
+		try {
+			await db.insert(weeks).values({
+				name: week,
+				createdAt: date
+			});
+			return { status: 'success', message: 'Week added successfully' };
+		} catch (error) {
+			console.error(error);
+			return { status: 'error', message: 'Failed to add week' };
+		}
 	}
 };
