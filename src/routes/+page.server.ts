@@ -3,7 +3,7 @@ import { superValidate } from 'sveltekit-superforms';
 import { newWeekFormSchema, newDailyWeightFormSchema } from '$lib/formSchema';
 import { zod } from 'sveltekit-superforms/adapters';
 import { db } from '$lib/db/index';
-import { weeks } from '$lib/db/schema';
+import { weeks, dailyWeights } from '$lib/db/schema';
 
 export const load: PageServerLoad = async () => {
 	return {
@@ -32,6 +32,11 @@ export const actions: Actions = {
 
 	addNewDailyWeight: async (event) => {
 		const form = await superValidate(event, zod(newDailyWeightFormSchema));
-		console.log(form.data);
+		const { weight, week, date } = form.data;
+		await db.insert(dailyWeights).values({
+			weight,
+			date,
+			weekId: week
+		});
 	}
 };

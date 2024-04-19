@@ -6,7 +6,7 @@ export const newWeekFormSchema = z.object({
 
 export const newDailyWeightFormSchema = z.object({
 	weight: z.number(),
-	week: z.string(),
+	week: z.number(),
 	date: z.date()
 });
 

@@ -1,11 +1,13 @@
 <script lang="ts">
-	import * as Card from '$lib/components/ui/card';
+	import { enhance } from '$app/forms';
+	import type { Week } from '$lib/db/schema';
+
+	export let weeks: Week[];
+
 	import Label from './ui/label/label.svelte';
 	import Input from './ui/input/input.svelte';
 	import Button from './ui/button/button.svelte';
-	import type { Week } from '$lib/db/schema';
-	export let weeks: Week[];
-	import { enhance } from '$app/forms';
+	import * as Card from '$lib/components/ui/card';
 </script>
 
 <Card.Root class="mt-8  py-6">
@@ -24,7 +26,7 @@
 				>
 					<option disabled selected>Select week</option>
 					{#each weeks as week}
-						<option class="dark:text black text-white" value={week.name}>{week.name}</option>
+						<option class="dark:text black text-white" value={week.id}>{week.name}</option>
 					{/each}
 				</select>
 			</div>
