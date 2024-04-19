@@ -2,6 +2,8 @@
 	import * as Tabs from '$lib/components/ui/tabs';
 	import WeekForm from './WeekForm.svelte';
 	import WeightForm from './WeightForm.svelte';
+	import type { Week } from '$lib/db/schema';
+	export let weeks: Week[];
 </script>
 
 <Tabs.Root value="week" class="w-[400px]">
@@ -13,6 +15,6 @@
 		<WeekForm />
 	</Tabs.Content>
 	<Tabs.Content value="weight">
-		<WeightForm />
+		<WeightForm {weeks} />
 	</Tabs.Content>
 </Tabs.Root>
