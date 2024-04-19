@@ -3,6 +3,7 @@
 	import type { PageData } from './$types';
 	export let data: PageData;
 	$: weeks = data.weeks;
+	//TODO: Check if you can add weeks to a store so that it can be used in other components
 </script>
 
 <svelte:head>
