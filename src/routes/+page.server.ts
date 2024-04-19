@@ -18,8 +18,9 @@ export const actions: Actions = {
 			});
 			return { status: 'success', message: 'Week added successfully' };
 		} catch (error) {
-			console.error(error);
-			return { status: 'error', message: 'Failed to add week' };
+			if (error instanceof Error) {
+				throw new Error(error.message);
+			}
 		}
 	}
 };
