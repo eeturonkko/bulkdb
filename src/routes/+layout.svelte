@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import '../app.pcss';
 	import Sidebar from '$lib/components/Sidebar.svelte';
 	import { ModeWatcher } from 'mode-watcher';

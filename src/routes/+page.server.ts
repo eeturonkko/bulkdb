@@ -33,6 +33,7 @@ export const actions: Actions = {
 	addNewDailyWeight: async (event) => {
 		const form = await superValidate(event, zod(newDailyWeightFormSchema));
 		const { weight, week, date } = form.data;
+
 		try {
 			await db.insert(dailyWeights).values({
 				weight,
