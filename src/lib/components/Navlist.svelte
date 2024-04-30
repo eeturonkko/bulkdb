@@ -2,7 +2,7 @@
 	import { ScrollArea } from '$lib/components/ui/scroll-area/index.js';
 	import { Separator } from '$lib/components/ui/separator/index.js';
 	import ThemeToggleButton from './ThemeToggleButton.svelte';
-	const tags = Array.from({ length: 30 }).map((_, i) => `Week ${i + 1}`);
+	import { weeksStore } from '../../store';
 </script>
 
 <ScrollArea
@@ -13,9 +13,9 @@
 			<ThemeToggleButton />
 			<h3 class="mb-4 text-lg font-semibold leading-none">Weeks</h3>
 		</div>
-		{#each tags as tag, i}
-			<a href={`/week/${i + 1}`} class="text-sm text-gray-700 dark:text-white">
-				{tag}
+		{#each $weeksStore as { id, name }}
+			<a href={`/week/${id}`} class="text-sm text-gray-700 dark:text-white">
+				{name}
 			</a>
 			<Separator class="my-2" />
 		{/each}
