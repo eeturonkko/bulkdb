@@ -2,12 +2,12 @@
 	import { enhance } from '$app/forms';
 	import type { Week } from '$lib/db/schema';
 
-	export let weeks: Week[];
-
 	import Label from './ui/label/label.svelte';
 	import Input from './ui/input/input.svelte';
 	import Button from './ui/button/button.svelte';
 	import * as Card from '$lib/components/ui/card';
+	import { getContext } from 'svelte';
+	const weeks: Week[] = getContext('weeks');
 </script>
 
 <Card.Root class="mt-8  py-6">

@@ -1,18 +1,9 @@
-import type { Actions, PageServerLoad } from './$types';
+import type { Actions } from './$types';
 import { superValidate } from 'sveltekit-superforms';
 import { newWeekFormSchema, newDailyWeightFormSchema } from '$lib/formSchema';
 import { zod } from 'sveltekit-superforms/adapters';
 import { db } from '$lib/db/index';
 import { weeks, dailyWeights } from '$lib/db/schema';
-
-//TODO: Move the load function in to +layout.server.ts
-//* Read more here: https://kit.svelte.dev/docs/load#$page-data Layout data section
-
-export const load: PageServerLoad = async () => {
-	return {
-		weeks: await db.query.weeks.findMany()
-	};
-};
 
 export const actions: Actions = {
 	addNewWeek: async (event) => {

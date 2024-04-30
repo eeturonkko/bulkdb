@@ -1,9 +1,5 @@
 <script lang="ts">
 	import FormTabs from '$lib/components/FormTabs.svelte';
-	import type { PageData } from './$types';
-	export let data: PageData;
-	$: weeks = data.weeks;
-	//TODO: Check if you can add weeks to a store so that it can be used in other components
 </script>
 
 <svelte:head>
@@ -15,5 +11,5 @@
 	<p class="mb-8 text-lg text-gray-700 dark:text-white">
 		Start by adding a new week or add your daily weight
 	</p>
-	<FormTabs {weeks} />
+	<FormTabs />
 </div>
