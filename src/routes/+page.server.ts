@@ -1,9 +1,9 @@
-import type { Actions } from './$types';
-import { superValidate } from 'sveltekit-superforms';
-import { newWeekFormSchema, newDailyWeightFormSchema } from '$lib/formSchema';
-import { zod } from 'sveltekit-superforms/adapters';
 import { db } from '$lib/db/index';
+import type { Actions } from './$types';
+import { zod } from 'sveltekit-superforms/adapters';
+import { superValidate } from 'sveltekit-superforms';
 import { weeks, dailyWeights } from '$lib/db/schema';
+import { newWeekFormSchema, newDailyWeightFormSchema } from '$lib/formSchema';
 
 export const actions: Actions = {
 	addNewWeek: async (event) => {
@@ -16,6 +16,7 @@ export const actions: Actions = {
 				name: week,
 				createdAt: date
 			});
+
 			return { status: 'success', message: 'Week added successfully' };
 		} catch (error) {
 			if (error instanceof Error) {

@@ -1,13 +1,12 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import type { Week } from '$lib/db/schema';
 
 	import Label from './ui/label/label.svelte';
 	import Input from './ui/input/input.svelte';
 	import Button from './ui/button/button.svelte';
 	import * as Card from '$lib/components/ui/card';
-	import { getContext } from 'svelte';
-	const weeks: Week[] = getContext('weeks');
+
+	import { weeks } from '../../store';
 </script>
 
 <Card.Root class="mt-8  py-6">
@@ -25,8 +24,8 @@
 					class="block h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:border-ring focus:outline-none focus:ring focus:ring-opacity-50 dark:text-gray-400"
 				>
 					<option disabled selected>Select week</option>
-					{#each weeks as week}
-						<option class="dark:text black text-white" value={week.id}>{week.name}</option>
+					{#each $weeks as { id, name }}
+						<option value={id}>{name}</option>
 					{/each}
 				</select>
 			</div>

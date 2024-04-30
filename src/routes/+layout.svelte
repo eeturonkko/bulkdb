@@ -2,17 +2,15 @@
 	import '../app.pcss';
 	import Sidebar from '$lib/components/Sidebar.svelte';
 	import { ModeWatcher } from 'mode-watcher';
-	import { setContext } from 'svelte';
-	import { writable } from 'svelte/store';
 	import type { LayoutData } from './$types';
+	import { weeks } from '../store';
+	import { setContext } from 'svelte';
 
-	// Get weeks from layout load function
+	// Retrieve weeks from db
 	export let data: LayoutData;
-	// Create store for weeks
-	const weeks = writable();
+	// Set weeks in weeks store and context
 	$: weeks.set(data.weeks);
-	// Set weeks context for children
-	setContext('weeks', data.weeks);
+	setContext('weeks', $weeks);
 </script>
 
 <ModeWatcher />
