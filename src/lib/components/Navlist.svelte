@@ -11,12 +11,13 @@
 >
 	<div class="p-4">
 		<div class="flex flex-col items-start justify-center gap-4">
-			<div class="flex w-full items-center justify-between">
+			<div class=" flex w-full items-center justify-between">
 				<a href="/"><Home /></a>
 				<ThemeToggleButton />
 			</div>
-			<h3 class="mb-4 text-lg font-semibold leading-none">Weeks</h3>
+			<Separator class="mb-4" />
 		</div>
+
 		{#each $weeksStore as { id, name }}
 			<a href={`/week/${id}`} class="flex items-center gap-2 text-gray-700 dark:text-white">
 				<CalendarDays size={20} />
