@@ -1,26 +1,34 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import * as Table from '$lib/components/ui/table';
+	import WeightChange from '$lib/components/WeightChange.svelte';
+
 	export let data: PageData;
 
 	const formatDate = (date: Date | null): string => {
 		if (!date) return 'No Date';
-		const d = new Date(date);
-		return d.toISOString().split('T')[0]; // outputs YYYY-MM-DD
+		return new Date(date).toISOString().split('T')[0]; // outputs YYYY-MM-DD
 	};
 
-	// Function to calculate weight differences and round them
 	const calculateDifferences = () => {
 		return data.weights.map((weight, index, weights) => {
-			if (index === 0) return { ...weight, difference: 0 }; // No previous data for the first entry
+			if (index === 0) return { ...weight, difference: 0 };
 			const difference = weight.weight - weights[index - 1].weight;
-			const roundedDifference = +difference.toFixed(2); // Round to two decimal places
-			return { ...weight, difference: roundedDifference };
+			return { ...weight, difference: +difference.toFixed(2) }; // Round to two decimal places
 		});
 	};
 
-	// Enhanced weights with differences
 	let enhancedWeights = calculateDifferences();
+
+	const startingWeight = data.weights[0]?.weight || 0;
+	const currentWeight = data.weights[data.weights.length - 1]?.weight || 0;
+	const totalWeightChange = +(currentWeight - startingWeight).toFixed(2);
+	const weightChangeColor =
+		totalWeightChange === 0
+			? 'text-yellow-400'
+			: totalWeightChange > 0
+				? 'text-green-500'
+				: 'text-red-500';
 </script>
 
 <svelte:head>
@@ -52,12 +60,14 @@
 									: difference > 0
 										? 'text-green-500'
 										: 'text-red-500'}
-								>{difference === 0 ? '0 kg' : `${difference > 0 ? '+' : ''}${difference} kg`}</span
 							>
+								{difference === 0 ? '0 kg' : `${difference > 0 ? '+' : ''}${difference} kg`}
+							</span>
 						</Table.Cell>
 					</Table.Row>
 				{/each}
 			</Table.Body>
 		</Table.Root>
 	</div>
+	<WeightChange {startingWeight} {currentWeight} {totalWeightChange} {weightChangeColor} />
 </main>
