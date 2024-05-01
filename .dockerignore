@@ -1,13 +1,2 @@
 node_modules
-.git
-.gitignore
-README.md
-Dockerfile
-.dockerignore
-.npm
-.npmrc
-.svelte
-.env
-.env.development
-.env.test
-.env.production
+
