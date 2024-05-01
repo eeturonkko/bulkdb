@@ -1,4 +1,3 @@
-// Import necessary types
 import type { DailyWeight } from '$lib/db/schema';
 
 export function getColorByWeightChange(weight: number): string {
