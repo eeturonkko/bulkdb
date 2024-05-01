@@ -3,6 +3,8 @@
 	import * as Table from '$lib/components/ui/table';
 	import WeightChange from '$lib/components/WeightChange.svelte';
 	import type { DailyWeight } from '$lib/db/schema';
+	import Button from '$lib/components/ui/button/button.svelte';
+	import { SquareX } from 'lucide-svelte';
 
 	export let data: PageData;
 
@@ -20,6 +22,7 @@
 			return { weight, difference: +difference.toFixed(2) };
 		});
 	};
+
 	$: siteTitle = `Bulkdb | ${data.week[0]?.name}` || 'Bulkdb | Weight';
 	$: enhancedWeights = calculateDifferences(data.weights);
 
@@ -49,6 +52,7 @@
 					<Table.Head>Date</Table.Head>
 					<Table.Head>Weight (kg)</Table.Head>
 					<Table.Head>Difference</Table.Head>
+					<Table.Head>Actions</Table.Head>
 				</Table.Row>
 			</Table.Header>
 			<Table.Body>
@@ -66,6 +70,13 @@
 							>
 								{difference === 0 ? '0 kg' : `${difference > 0 ? '+' : ''}${difference} kg`}
 							</span>
+						</Table.Cell>
+						<Table.Cell>
+							<form action="?/deleteWeightEntry" method="post">
+								<input type="hidden" name="id" value={weight.id} />
+
+								<Button variant="ghost" type="submit"><SquareX /></Button>
+							</form>
 						</Table.Cell>
 					</Table.Row>
 				{/each}

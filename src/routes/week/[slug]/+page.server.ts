@@ -1,7 +1,10 @@
 import { db } from '$lib/db/index';
 import { eq } from 'drizzle-orm';
+import { zod } from 'sveltekit-superforms/adapters';
+import { superValidate } from 'sveltekit-superforms';
 import { weeks, dailyWeights } from '$lib/db/schema';
-import type { PageServerLoad } from './$types';
+import type { PageServerLoad, Actions } from './$types';
+import { deleteWeightEntry } from '$lib/formSchema';
 
 export const load: PageServerLoad = async ({ params }) => {
 	const { slug } = params;
@@ -15,4 +18,19 @@ export const load: PageServerLoad = async ({ params }) => {
 			.from(dailyWeights)
 			.where(eq(dailyWeights.weekId, parseInt(slug)))
 	};
+};
+
+export const actions: Actions = {
+	deleteWeightEntry: async (event) => {
+		const form = await superValidate(event, zod(deleteWeightEntry));
+		const { id } = form.data;
+		try {
+			await db.delete(dailyWeights).where(eq(dailyWeights.id, id));
+			return { status: 'success', message: 'Weight entry deleted successfully' };
+		} catch (error) {
+			if (error instanceof Error) {
+				throw new Error(error.message);
+			}
+		}
+	}
 };
