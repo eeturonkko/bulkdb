@@ -3,7 +3,7 @@
 	import { Separator } from '$lib/components/ui/separator/index.js';
 	import ThemeToggleButton from './ThemeToggleButton.svelte';
 	import { weeksStore } from '../../store';
-	import { Home } from 'lucide-svelte';
+	import { CalendarDays, Home } from 'lucide-svelte';
 </script>
 
 <ScrollArea
@@ -18,7 +18,8 @@
 			<h3 class="mb-4 text-lg font-semibold leading-none">Weeks</h3>
 		</div>
 		{#each $weeksStore as { id, name }}
-			<a href={`/week/${id}`} class="text-sm text-gray-700 dark:text-white">
+			<a href={`/week/${id}`} class="flex items-center gap-2 text-gray-700 dark:text-white">
+				<CalendarDays size={20} />
 				{name}
 			</a>
 			<Separator class="my-2" />
