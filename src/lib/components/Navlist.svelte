@@ -4,6 +4,8 @@
 	import ThemeToggleButton from './ThemeToggleButton.svelte';
 	import { weeksStore } from '../../store';
 	import { CalendarDays, Home } from 'lucide-svelte';
+
+	$: weeksStores = weeksStore;
 </script>
 
 <ScrollArea
@@ -18,7 +20,7 @@
 			<Separator class="mb-4" />
 		</div>
 
-		{#each $weeksStore as { id, name }}
+		{#each $weeksStores as { id, name }}
 			<a href={`/week/${id}`} class="flex items-center gap-2 text-gray-700 dark:text-white">
 				<CalendarDays size={20} />
 				{name}

@@ -2,6 +2,7 @@
 	import type { PageData } from './$types';
 	import * as Table from '$lib/components/ui/table';
 	import WeightChange from '$lib/components/WeightChange.svelte';
+	import type { DailyWeight } from '$lib/db/schema';
 
 	export let data: PageData;
 
@@ -10,20 +11,22 @@
 		return new Date(date).toISOString().split('T')[0]; // outputs YYYY-MM-DD
 	};
 
-	const calculateDifferences = () => {
-		return data.weights.map((weight, index, weights) => {
-			if (index === 0) return { ...weight, difference: 0 };
+	const calculateDifferences = (
+		weights: DailyWeight[]
+	): { weight: DailyWeight; difference: number }[] => {
+		return weights.map((weight, index, weights) => {
+			if (index === 0) return { weight, difference: 0 };
 			const difference = weight.weight - weights[index - 1].weight;
-			return { ...weight, difference: +difference.toFixed(2) }; // Round to two decimal places
+			return { weight, difference: +difference.toFixed(2) };
 		});
 	};
 
-	let enhancedWeights = calculateDifferences();
+	$: enhancedWeights = calculateDifferences(data.weights);
 
-	const startingWeight = data.weights[0]?.weight || 0;
-	const currentWeight = data.weights[data.weights.length - 1]?.weight || 0;
-	const totalWeightChange = +(currentWeight - startingWeight).toFixed(2);
-	const weightChangeColor =
+	$: startingWeight = data.weights[0]?.weight || 0;
+	$: currentWeight = data.weights[data.weights.length - 1]?.weight || 0;
+	$: totalWeightChange = +(currentWeight - startingWeight).toFixed(2);
+	$: weightChangeColor =
 		totalWeightChange === 0
 			? 'text-yellow-400'
 			: totalWeightChange > 0
@@ -49,10 +52,10 @@
 				</Table.Row>
 			</Table.Header>
 			<Table.Body>
-				{#each enhancedWeights as { date, weight, difference }}
+				{#each enhancedWeights as { weight, difference }}
 					<Table.Row>
-						<Table.Cell>{formatDate(date)}</Table.Cell>
-						<Table.Cell>{weight} kg</Table.Cell>
+						<Table.Cell>{formatDate(weight.date)}</Table.Cell>
+						<Table.Cell>{weight.weight} kg</Table.Cell>
 						<Table.Cell>
 							<span
 								class={difference === 0
