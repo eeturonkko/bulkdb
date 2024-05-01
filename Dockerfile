@@ -1,24 +1,26 @@
-FROM node:18-alpine AS builder
+# Use the official lightweight Node.js 16 image.
+# https://hub.docker.com/_/node
+FROM node:16-buster-slim
 
-RUN mkdir /app && mkdir /app/data
+# Create and change to the app directory.
+WORKDIR /usr/src/app
 
-COPY . /app
+# Copy application dependency manifests to the container image.
+# A wildcard is used to ensure both package.json AND package-lock.json are copied.
+# Copying this separately prevents re-running npm install on every code change.
+COPY package*.json ./
 
-RUN cd /app && yarn install && \
-  echo "DATABASE_URL=postgres://postgres:admin@192.168.100.18:5433/bulkdb" > /app/.env && \
-  yarn build 
+# Install production dependencies.
+RUN npm install --production
 
-FROM node:18-alpine
+# Copy local code to the container image.
+COPY . .
 
-RUN mkdir /app
+# Build the application if needed (uncomment this line for SvelteKit)
+# RUN npm run build
 
-COPY --from=builder /app/build /app/build
-COPY --from=builder /app/package.json /app/yarn.lock /app/
+# Set the DATABASE_URL environment variable
+ENV DATABASE_URL="postgres://postgres:admin@192.168.100.18:5433/bulkdb"
 
-RUN cd /app && \ 
-  yarn install --production && \
-  yarn cache clean
-
-WORKDIR /app
-
-CMD ["node", "build/index.js"]
+# Run the web service on container startup.
+CMD [ "npm", "start" ]
