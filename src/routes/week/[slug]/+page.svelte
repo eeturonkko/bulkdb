@@ -20,7 +20,7 @@
 			return { weight, difference: +difference.toFixed(2) };
 		});
 	};
-
+	$: siteTitle = `Bulkdb | ${data.week[0]?.name}` || 'Bulkdb | Weight';
 	$: enhancedWeights = calculateDifferences(data.weights);
 
 	$: startingWeight = data.weights[0]?.weight || 0;
@@ -35,7 +35,7 @@
 </script>
 
 <svelte:head>
-	<title>Bulkdb | Weight data</title>
+	<title>{siteTitle}</title>
 </svelte:head>
 
 <main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
