@@ -22,5 +22,7 @@ COPY . .
 # Set the DATABASE_URL environment variable
 ENV DATABASE_URL="postgres://postgres:admin@192.168.100.18:5433/bulkdb"
 
+EXPOSE 3000
+
 # Run the web service on container startup.
 CMD [ "npm", "start" ]
