@@ -29,7 +29,7 @@
 <main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
 	<div class="flex items-center justify-between">
 		<div class="space-y-4">
-			<h2 class="text-lg font-semibold md:text-2xl">Weight</h2>
+			<h2 class="text-lg font-semibold md:text-2xl">{data.week[0]?.name} weights</h2>
 			<Badge
 				class={data.week[0]?.target === 'Bulk'
 					? 'bg-green-700 text-white'
