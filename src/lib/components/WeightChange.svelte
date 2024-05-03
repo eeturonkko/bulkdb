@@ -30,7 +30,7 @@
 			>
 				<h3 class="mb-2 text-base font-medium text-gray-500 dark:text-gray-400">Average Weight</h3>
 				<p class="text-4xl font-bold text-gray-900 dark:text-gray-50 md:text-4xl">
-					{averageWeight} kg
+					{averageWeight ? `${averageWeight} kg` : '0 kg'}
 				</p>
 			</div>
 			<div
