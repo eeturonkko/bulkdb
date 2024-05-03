@@ -3,7 +3,8 @@ import { date, pgTable, text, real, serial } from 'drizzle-orm/pg-core';
 export const weeks = pgTable('weeks', {
 	id: serial('id').primaryKey(),
 	name: text('name').notNull(),
-	createdAt: date('created_at', { mode: 'date' })
+	createdAt: date('created_at', { mode: 'date' }),
+	target: text('target').notNull().default('Bulk')
 });
 
 export const dailyWeights = pgTable('daily_weight', {

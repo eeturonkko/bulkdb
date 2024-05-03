@@ -14,6 +14,17 @@
 		<form use:enhance class="space-y-4" action="?/addNewWeek" method="post">
 			<Label for="week">Name for the week</Label>
 			<Input required name="week" id="week" placeholder="Week 1 etc..." type="text" />
+			<div class="flex flex-col gap-4">
+				<Label for="week">Target</Label>
+				<div class="flex gap-2">
+					<input required name="target" id="bulk" type="radio" value="Bulk" />
+					<Label for="bulk">Bulk</Label>
+				</div>
+				<div class="flex gap-2">
+					<input required name="target" id="cut" type="radio" value="Cut" />
+					<Label for="cut">Cut</Label>
+				</div>
+			</div>
 			<Button type="submit" size="lg">Create</Button>
 		</form>
 	</Card.Content>

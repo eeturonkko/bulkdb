@@ -1,0 +1,1 @@
+ALTER TABLE "weeks" ADD COLUMN "target" text DEFAULT 'Bulk' NOT NULL;

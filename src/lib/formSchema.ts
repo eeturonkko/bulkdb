@@ -1,7 +1,8 @@
 import { z } from 'zod';
 
 export const newWeekFormSchema = z.object({
-	week: z.string().min(2).max(50)
+	week: z.string().min(2).max(50),
+	target: z.string()
 });
 
 export const newDailyWeightFormSchema = z.object({

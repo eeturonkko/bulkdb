@@ -8,13 +8,14 @@ import { newWeekFormSchema, newDailyWeightFormSchema } from '$lib/formSchema';
 export const actions: Actions = {
 	addNewWeek: async (event) => {
 		const form = await superValidate(event, zod(newWeekFormSchema));
-		const { week } = form.data;
+		const { week, target } = form.data;
 		const date = new Date();
 
 		try {
 			await db.insert(weeks).values({
 				name: week,
-				createdAt: date
+				createdAt: date,
+				target: target
 			});
 
 			return { status: 'success', message: 'Week added successfully' };
