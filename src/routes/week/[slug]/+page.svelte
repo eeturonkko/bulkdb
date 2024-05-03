@@ -39,7 +39,7 @@
 				<Table.Row>
 					<Table.Head>Date</Table.Head>
 					<Table.Head>Weight (kg)</Table.Head>
-					<Table.Head>Difference to before</Table.Head>
+					<Table.Head>Difference to day before</Table.Head>
 					<Table.Head>Actions</Table.Head>
 				</Table.Row>
 			</Table.Header>
