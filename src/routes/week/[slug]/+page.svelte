@@ -15,7 +15,6 @@
 	$: startingWeight = data.weights[0]?.weight || 0;
 	$: currentWeight = data.weights[data.weights.length - 1]?.weight || 0;
 	$: totalWeightChange = +(currentWeight - startingWeight).toFixed(2);
-	// Calc average weight and round to 2 decimal places
 	$: averageWeight = +(
 		data.weights.reduce((acc, { weight }) => acc + weight, 0) / data.weights.length
 	).toFixed(2);
@@ -40,7 +39,7 @@
 				<Table.Row>
 					<Table.Head>Date</Table.Head>
 					<Table.Head>Weight (kg)</Table.Head>
-					<Table.Head>Difference</Table.Head>
+					<Table.Head>Difference to before</Table.Head>
 					<Table.Head>Actions</Table.Head>
 				</Table.Row>
 			</Table.Header>
