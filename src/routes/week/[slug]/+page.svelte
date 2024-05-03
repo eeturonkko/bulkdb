@@ -15,6 +15,10 @@
 	$: startingWeight = data.weights[0]?.weight || 0;
 	$: currentWeight = data.weights[data.weights.length - 1]?.weight || 0;
 	$: totalWeightChange = +(currentWeight - startingWeight).toFixed(2);
+	// Calc average weight and round to 2 decimal places
+	$: averageWeight = +(
+		data.weights.reduce((acc, { weight }) => acc + weight, 0) / data.weights.length
+	).toFixed(2);
 	$: weightChangeColor = getColorByWeightChange(totalWeightChange);
 </script>
 
@@ -59,7 +63,6 @@
 						<Table.Cell>
 							<form use:enhance action="?/deleteWeightEntry" method="post">
 								<input type="hidden" name="id" value={weight.id} />
-
 								<Button variant="ghost" type="submit"><SquareX /></Button>
 							</form>
 						</Table.Cell>
@@ -68,5 +71,11 @@
 			</Table.Body>
 		</Table.Root>
 	</div>
-	<WeightChange {startingWeight} {currentWeight} {totalWeightChange} {weightChangeColor} />
+	<WeightChange
+		{startingWeight}
+		{currentWeight}
+		{totalWeightChange}
+		{weightChangeColor}
+		{averageWeight}
+	/>
 </main>
