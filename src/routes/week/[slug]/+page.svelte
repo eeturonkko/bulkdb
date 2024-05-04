@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { SquareX } from 'lucide-svelte';
+	import { Ellipsis, SquareX } from 'lucide-svelte';
 	import type { PageData } from './$types';
 	import { Badge } from '$lib/components/ui/badge';
 	import * as Table from '$lib/components/ui/table';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import WeightChange from '$lib/components/WeightChange.svelte';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
+	import WeekDropdownMenu from '$lib/components/WeekDropdownMenu.svelte';
 	import { getColorByWeightChange, calculateDifferences, formatDate } from '$lib/utils/functions';
 
 	export let data: PageData;
@@ -29,17 +31,14 @@
 <main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
 	<div class="flex items-center justify-between">
 		<div class="space-y-4">
-			<h2 class="text-lg font-semibold md:text-2xl">{data.week[0]?.name} weights</h2>
+			<h2 class="text-lg font-semibold md:text-2xl">{data.week[0]?.name}</h2>
 			<Badge
 				class={data.week[0]?.target === 'Bulk'
 					? 'bg-green-700 text-white'
 					: 'bg-red-700 text-white'}>{data.week[0]?.target} week</Badge
 			>
 		</div>
-		<form use:enhance action="?/deleteWeek" method="post">
-			<input type="hidden" name="id" value={data.week[0]?.id} />
-			<Button type="submit" variant="destructive">Delete week</Button>
-		</form>
+		<WeekDropdownMenu weekId={data.week[0]?.id} />
 	</div>
 	<div class="rounded-lg border shadow-sm">
 		<Table.Root>
