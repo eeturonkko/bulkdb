@@ -27,10 +27,10 @@ export const actions: Actions = {
 		const { id } = form.data;
 		try {
 			await db.delete(dailyWeights).where(eq(dailyWeights.id, id));
-			return { status: 'success', message: 'Weight entry deleted successfully' };
+			return { status: 200, message: 'Weight entry deleted successfully' };
 		} catch (error) {
 			if (error instanceof Error) {
-				throw new Error(error.message);
+				return { status: 500, error: 'Failed to delete weight entry' };
 			}
 		}
 	},
@@ -41,6 +41,6 @@ export const actions: Actions = {
 			db.delete(dailyWeights).where(eq(dailyWeights.weekId, id)),
 			db.delete(weeks).where(eq(weeks.id, id))
 		]);
-		redirect(300, '/');
+		redirect(303, '/');
 	}
 };

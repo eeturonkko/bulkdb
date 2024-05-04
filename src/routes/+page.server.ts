@@ -18,10 +18,10 @@ export const actions: Actions = {
 				target: target
 			});
 
-			return { status: 'success', message: 'Week added successfully' };
+			return { status: 201, message: 'Week added successfully' };
 		} catch (error) {
 			if (error instanceof Error) {
-				throw new Error(error.message);
+				return { status: 500, error: 'Failed to add new week' };
 			}
 		}
 	},
@@ -36,10 +36,10 @@ export const actions: Actions = {
 				date,
 				weekId: week
 			});
-			return { status: 'success', message: 'Daily weight added successfully' };
+			return { status: 201, message: 'Daily weight added successfully' };
 		} catch (error) {
 			if (error instanceof Error) {
-				throw new Error(error.message);
+				return { status: 500, error: 'Failed to add new daily weight' };
 			}
 		}
 	}
