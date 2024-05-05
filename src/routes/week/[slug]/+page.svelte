@@ -6,7 +6,6 @@
 	import * as Table from '$lib/components/ui/table';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import WeightChange from '$lib/components/WeightChange.svelte';
-	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import WeekDropdownMenu from '$lib/components/WeekDropdownMenu.svelte';
 	import { getColorByWeightChange, calculateDifferences, formatDate } from '$lib/utils/functions';
 
@@ -18,6 +17,7 @@
 	$: startingWeight = data.weights[0]?.weight || 0;
 	$: currentWeight = data.weights[data.weights.length - 1]?.weight || 0;
 	$: totalWeightChange = +(currentWeight - startingWeight).toFixed(2);
+	$: averageWeightChange = +(totalWeightChange / data.weights.length).toFixed(2);
 	$: averageWeight = +(
 		data.weights.reduce((acc, { weight }) => acc + weight, 0) / data.weights.length
 	).toFixed(2);
@@ -80,8 +80,8 @@
 	<WeightChange
 		{startingWeight}
 		{currentWeight}
-		{totalWeightChange}
 		{weightChangeColor}
 		{averageWeight}
+		{averageWeightChange}
 	/>
 </main>

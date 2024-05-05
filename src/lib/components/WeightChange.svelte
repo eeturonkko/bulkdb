@@ -2,8 +2,8 @@
 	export let averageWeight: number;
 	export let currentWeight: number;
 	export let startingWeight: number;
-	export let totalWeightChange: number;
 	export let weightChangeColor: string;
+	export let averageWeightChange: number;
 </script>
 
 <section class="md:py-8 lg:py-8">
@@ -37,12 +37,12 @@
 				class="flex flex-col items-center justify-center rounded-lg transition-all hover:scale-105 md:p-8"
 			>
 				<h3 class="mb-2 text-base font-medium text-gray-500 dark:text-gray-400">
-					Total Weight Change
+					Average Weight Change
 				</h3>
 				<p class={`text-4xl font-bold ${weightChangeColor} md:text-4xl`}>
-					{totalWeightChange === 0
+					{averageWeightChange === 0
 						? '0 kg'
-						: `${totalWeightChange > 0 ? '+' : ''}${totalWeightChange} kg`}
+						: `${averageWeightChange > 0 ? '+' : ''}${averageWeightChange} kg`}
 				</p>
 			</div>
 		</div>
