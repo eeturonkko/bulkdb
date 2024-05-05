@@ -40,9 +40,11 @@
 					Average Weight Change
 				</h3>
 				<p class={`text-4xl font-bold ${weightChangeColor} md:text-4xl`}>
-					{averageWeightChange === 0
-						? '0 kg'
-						: `${averageWeightChange > 0 ? '+' : ''}${averageWeightChange} kg`}
+					{#if averageWeightChange === 0 || !averageWeightChange}
+						0 kg
+					{:else}
+						{averageWeightChange > 0 ? '+' : ''}{averageWeightChange} kg
+					{/if}
 				</p>
 			</div>
 		</div>
