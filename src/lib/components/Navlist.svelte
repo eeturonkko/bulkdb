@@ -3,7 +3,7 @@
 	import { Separator } from '$lib/components/ui/separator/index.js';
 	import ThemeToggleButton from './ThemeToggleButton.svelte';
 	import { weeksStore } from '../../store';
-	import { CalendarDays, Home } from 'lucide-svelte';
+	import { CalendarDays, Home, AreaChart } from 'lucide-svelte';
 
 	$: weeksStores = weeksStore;
 </script>
@@ -17,6 +17,9 @@
 				<a href="/"><Home /></a>
 				<ThemeToggleButton />
 			</div>
+			<a class="flex items-center gap-2 text-gray-700 dark:text-white" href="/analytics">
+				<AreaChart /> Analytics</a
+			>
 			<Separator class="mb-4" />
 		</div>
 
