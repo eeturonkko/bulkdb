@@ -13,6 +13,8 @@ export const load: PageServerLoad = async () => {
           daily_weight
       INNER JOIN
           weeks ON daily_weight.week_id = weeks.id
+      WHERE
+          weeks.is_archived = false
       GROUP BY
           weeks.id, weeks.name
       ORDER BY
