@@ -1,10 +1,11 @@
-import { date, pgTable, text, real, serial } from 'drizzle-orm/pg-core';
+import { date, pgTable, text, real, serial, boolean } from 'drizzle-orm/pg-core';
 
 export const weeks = pgTable('weeks', {
 	id: serial('id').primaryKey(),
 	name: text('name').notNull(),
 	createdAt: date('created_at', { mode: 'date' }),
-	target: text('target').notNull().default('Bulk')
+	target: text('target').notNull().default('Bulk'),
+	isArchived: boolean('is_archived').notNull().default(false)
 });
 
 export const dailyWeights = pgTable('daily_weight', {
