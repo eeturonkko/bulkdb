@@ -5,7 +5,7 @@ import { zod } from 'sveltekit-superforms/adapters';
 import { superValidate } from 'sveltekit-superforms';
 import { weeks, dailyWeights } from '$lib/db/schema';
 import type { PageServerLoad, Actions } from './$types';
-import { deleteWeightEntryOrWeek } from '$lib/formSchema';
+import { validateId } from '$lib/formSchema';
 
 export const load: PageServerLoad = async ({ params }) => {
 	const { slug } = params;
@@ -23,7 +23,7 @@ export const load: PageServerLoad = async ({ params }) => {
 
 export const actions: Actions = {
 	deleteWeightEntry: async (event) => {
-		const form = await superValidate(event, zod(deleteWeightEntryOrWeek));
+		const form = await superValidate(event, zod(validateId));
 		const { id } = form.data;
 		try {
 			await db.delete(dailyWeights).where(eq(dailyWeights.id, id));
@@ -35,7 +35,7 @@ export const actions: Actions = {
 		}
 	},
 	deleteWeek: async (event) => {
-		const form = await superValidate(event, zod(deleteWeightEntryOrWeek));
+		const form = await superValidate(event, zod(validateId));
 		const { id } = form.data;
 		await Promise.all([
 			db.delete(dailyWeights).where(eq(dailyWeights.weekId, id)),
@@ -44,7 +44,7 @@ export const actions: Actions = {
 		redirect(303, '/');
 	},
 	archiveWeek: async (event) => {
-		const form = await superValidate(event, zod(deleteWeightEntryOrWeek));
+		const form = await superValidate(event, zod(validateId));
 		const { id } = form.data;
 		await db.update(weeks).set({ isArchived: true }).where(eq(weeks.id, id));
 		redirect(303, '/archive');

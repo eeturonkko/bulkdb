@@ -11,10 +11,10 @@ export const newDailyWeightFormSchema = z.object({
 	date: z.date()
 });
 
-export const deleteWeightEntryOrWeek = z.object({
+export const validateId = z.object({
 	id: z.number()
 });
 
 export type NewWeekFormSchema = typeof newWeekFormSchema;
-export type DeleteWeightEntryOrWeek = typeof deleteWeightEntryOrWeek;
+export type ValidateId = typeof validateId;
 export type NewDailyWeightFormSchema = typeof newDailyWeightFormSchema;
