@@ -1,7 +1,8 @@
 <script lang="ts">
 	import * as Table from '$lib/components/ui/table';
+	import type { PageData } from './$types';
 
-	//export let data: PageData;
+	export let data: PageData;
 </script>
 
 <svelte:head>
@@ -19,16 +20,22 @@
 				</Table.Row>
 			</Table.Header>
 			<Table.Body>
-				<Table.Row>
-					<Table.Cell>
-						<a href="/week/2">Week 1 test</a>
-					</Table.Cell>
-				</Table.Row>
-				<Table.Row>
-					<Table.Cell>
-						<a href="/week/61">Week 2 test</a>
-					</Table.Cell>
-				</Table.Row>
+				{#each data.weeks as week}
+					{#if week.isArchived}
+						<Table.Row>
+							<Table.Cell>
+								<a href={`/week/${week.id}`}>{week.name}</a>
+							</Table.Cell>
+
+							<Table.Cell>
+								<!--  <form use:enhance action="?/deleteWeightEntry" method="post">
+              <input type="hidden" name="id" value={weight.id} />
+              <Button variant="ghost" type="submit"><SquareX /></Button>
+            </form> -->
+							</Table.Cell>
+						</Table.Row>
+					{/if}
+				{/each}
 			</Table.Body>
 		</Table.Root>
 	</div>
