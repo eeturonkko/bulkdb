@@ -9,19 +9,18 @@ import type { PageServerLoad, Actions } from './$types';
 
 export const load: PageServerLoad = async ({ params }) => {
 	const { slug } = params;
+	const weekId = parseInt(slug);
+
+	const [week, weights, commentsList] = await Promise.all([
+		db.select().from(weeks).where(eq(weeks.id, weekId)),
+		db.select().from(dailyWeights).where(eq(dailyWeights.weekId, weekId)),
+		db.select().from(comments).where(eq(comments.weekId, weekId))
+	]);
+
 	return {
-		week: await db
-			.select()
-			.from(weeks)
-			.where(eq(weeks.id, parseInt(slug))),
-		weights: await db
-			.select()
-			.from(dailyWeights)
-			.where(eq(dailyWeights.weekId, parseInt(slug))),
-		comments: await db
-			.select()
-			.from(comments)
-			.where(eq(comments.weekId, parseInt(slug)))
+		week,
+		weights,
+		comments: commentsList
 	};
 };
 
