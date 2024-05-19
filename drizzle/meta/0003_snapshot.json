@@ -1,7 +1,64 @@
 {
+  "id": "288f2033-ee08-4e69-96f6-4a540da7ea15",
+  "prevId": "83c33550-9a18-476c-8454-6497b755f89f",
   "version": "6",
   "dialect": "postgresql",
   "tables": {
+    "public.comments": {
+      "name": "comments",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "text": {
+          "name": "text",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "timestamp": {
+          "name": "timestamp",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "week_id": {
+          "name": "week_id",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "comments_week_id_weeks_id_fk": {
+          "name": "comments_week_id_weeks_id_fk",
+          "tableFrom": "comments",
+          "tableTo": "weeks",
+          "columnsFrom": [
+            "week_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "public.daily_weight": {
       "name": "daily_weight",
       "schema": "",
@@ -36,15 +93,15 @@
         "daily_weight_week_id_weeks_id_fk": {
           "name": "daily_weight_week_id_weeks_id_fk",
           "tableFrom": "daily_weight",
+          "tableTo": "weeks",
           "columnsFrom": [
             "week_id"
           ],
-          "tableTo": "weeks",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "no action"
+          "onDelete": "no action",
+          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
@@ -96,10 +153,8 @@
   "enums": {},
   "schemas": {},
   "_meta": {
+    "columns": {},
     "schemas": {},
-    "tables": {},
-    "columns": {}
-  },
-  "id": "83c33550-9a18-476c-8454-6497b755f89f",
-  "prevId": "c3d9315e-e566-43ca-a775-529e1e1e070e"
+    "tables": {}
+  }
 }

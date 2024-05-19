@@ -1,10 +1,8 @@
 {
-  "id": "c3d9315e-e566-43ca-a775-529e1e1e070e",
-  "prevId": "66abd0d3-23ad-4bd6-9f2c-1751461b504b",
-  "version": "5",
-  "dialect": "pg",
+  "version": "6",
+  "dialect": "postgresql",
   "tables": {
-    "daily_weight": {
+    "public.daily_weight": {
       "name": "daily_weight",
       "schema": "",
       "columns": {
@@ -38,21 +36,21 @@
         "daily_weight_week_id_weeks_id_fk": {
           "name": "daily_weight_week_id_weeks_id_fk",
           "tableFrom": "daily_weight",
-          "tableTo": "weeks",
           "columnsFrom": [
             "week_id"
           ],
+          "tableTo": "weeks",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "onUpdate": "no action",
+          "onDelete": "no action"
         }
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "weeks": {
+    "public.weeks": {
       "name": "weeks",
       "schema": "",
       "columns": {
@@ -91,8 +89,10 @@
   "enums": {},
   "schemas": {},
   "_meta": {
-    "columns": {},
     "schemas": {},
-    "tables": {}
-  }
+    "tables": {},
+    "columns": {}
+  },
+  "id": "c3d9315e-e566-43ca-a775-529e1e1e070e",
+  "prevId": "66abd0d3-23ad-4bd6-9f2c-1751461b504b"
 }

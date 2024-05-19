@@ -1,4 +1,4 @@
-import { date, pgTable, text, real, serial, boolean } from 'drizzle-orm/pg-core';
+import { date, pgTable, text, real, serial, boolean, timestamp } from 'drizzle-orm/pg-core';
 
 export const weeks = pgTable('weeks', {
 	id: serial('id').primaryKey(),
@@ -19,6 +19,7 @@ export const comments = pgTable('comments', {
 	id: serial('id').primaryKey(),
 	text: text('text').notNull(),
 	createdAt: date('created_at', { mode: 'date' }),
+	timestamp: timestamp('timestamp').notNull().defaultNow(),
 	weekId: serial('week_id').references(() => weeks.id)
 });
 

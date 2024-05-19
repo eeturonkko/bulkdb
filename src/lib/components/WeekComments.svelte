@@ -2,9 +2,11 @@
 	import { enhance } from '$app/forms';
 	import Input from './ui/input/input.svelte';
 	import avatar from '$lib/assets/avatar.jpg';
+	import { timeAgo } from '$lib/utils/functions';
+	import type { Comment } from '$lib/db/schema';
+
 	import Button from './ui/button/button.svelte';
 	import * as Avatar from '$lib/components/ui/avatar';
-	import type { Comment } from '$lib/db/schema';
 
 	export let weekId: number;
 	export let comments: Comment[];
@@ -42,7 +44,7 @@
 				</Avatar.Root>
 				<div class="flex-1 space-y-1">
 					<div class="flex items-center justify-between">
-						<div class="text-xs text-gray-500 dark:text-gray-400">1 day ago</div>
+						<div class="text-xs text-gray-500 dark:text-gray-400">{timeAgo(comment.timestamp)}</div>
 					</div>
 					<p>{comment.text}</p>
 				</div>

@@ -1,4 +1,12 @@
 import type { DailyWeight } from '$lib/db/schema';
+import { formatDistance } from 'date-fns';
+
+export function timeAgo(date: string | Date | null): string {
+	if (!date) {
+		return 'Unknown time';
+	}
+	return formatDistance(new Date(date), new Date(), { addSuffix: true });
+}
 
 export function getColorByWeightChange(weight: number): string {
 	switch (true) {
