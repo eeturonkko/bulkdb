@@ -14,18 +14,29 @@
 	export let data: PageData;
 
 	const avgWeights: number[] = data.averageWeights.map((d) => parseFloat(d.average_weight));
-
+	const labels: string[] = data.averageWeights.map((d) => d.week_name);
 	let el: HTMLDivElement;
 
 	onMount(() => {
-		d3.select(el)
+		const chart = d3.select(el);
+		const bar = chart
 			.selectAll('div')
 			.data(avgWeights)
 			.enter()
 			.append('div')
 			.attr('class', 'bg-blue-500 text-white font-semibold px-1 my-0.5 text-start')
 			.style('width', (d: number) => `${d * 10}px`)
+			.style('position', 'relative')
 			.text((d: number) => d.toString());
+		bar
+			.append('div')
+			.data(labels)
+			.attr('class', 'label text-white text-sm')
+			.style('position', 'absolute')
+			.style('left', (d: string) => '-120px') // Adjust this value as needed to move the labels
+			.style('top', '50%')
+			.style('transform', 'translateY(-50%)')
+			.text((d: string) => d);
 	});
 </script>
 
