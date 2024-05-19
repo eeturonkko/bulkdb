@@ -39,7 +39,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"bits-ui": "^0.21.7",
+		"bits-ui": "^0.21.8",
 		"clsx": "^2.1.0",
 		"d3": "^7.9.0",
 		"dotenv": "^16.4.5",

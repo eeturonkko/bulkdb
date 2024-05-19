@@ -1,11 +1,11 @@
 import { db } from '$lib/db/index';
 import { eq } from 'drizzle-orm';
 import { redirect } from '@sveltejs/kit';
+import { validateId } from '$lib/formSchema';
 import { zod } from 'sveltekit-superforms/adapters';
 import { superValidate } from 'sveltekit-superforms';
 import { weeks, dailyWeights } from '$lib/db/schema';
 import type { PageServerLoad, Actions } from './$types';
-import { validateId } from '$lib/formSchema';
 
 export const load: PageServerLoad = async ({ params }) => {
 	const { slug } = params;
@@ -49,4 +49,11 @@ export const actions: Actions = {
 		await db.update(weeks).set({ isArchived: true }).where(eq(weeks.id, id));
 		redirect(303, '/archive');
 	}
+	//TODO: Add comment functionality
+	/* addComment: async (event) => {
+    const form = await superValidate(event, zod(validateId));
+    const { text, weekId } = form.data;
+    await db.insert(comments).values({ text, weekId });
+    return { status: 200, message: 'Comment added successfully' };
+  } */
 };

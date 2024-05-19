@@ -6,6 +6,7 @@
 	import * as Table from '$lib/components/ui/table';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import WeightChange from '$lib/components/WeightChange.svelte';
+	import WeekComments from '$lib/components/WeekComments.svelte';
 	import WeekDropdownMenu from '$lib/components/WeekDropdownMenu.svelte';
 	import { getColorByWeightChange, calculateDifferences, formatDate } from '$lib/utils/functions';
 
@@ -77,11 +78,14 @@
 			</Table.Body>
 		</Table.Root>
 	</div>
-	<WeightChange
-		{startingWeight}
-		{currentWeight}
-		{weightChangeColor}
-		{averageWeight}
-		{averageWeightChange}
-	/>
+	<div class="flex flex-col items-center gap-4">
+		<WeightChange
+			{startingWeight}
+			{currentWeight}
+			{weightChangeColor}
+			{averageWeight}
+			{averageWeightChange}
+		/>
+		<WeekComments />
+	</div>
 </main>
