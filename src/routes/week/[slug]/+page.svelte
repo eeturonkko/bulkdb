@@ -38,7 +38,7 @@
 					: 'bg-red-700 text-white'}>{data.week[0]?.target} week</Badge
 			>
 		</div>
-		<WeekDropdownMenu weekId={data.week[0]?.id} />
+		<WeekDropdownMenu weekId={data.week[0]?.id} isArchived={data.week[0]?.isArchived} />
 	</div>
 	<div class="rounded-lg border shadow-sm">
 		<Table.Root>
