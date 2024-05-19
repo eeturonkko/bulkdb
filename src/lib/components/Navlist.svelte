@@ -26,12 +26,14 @@
 			<Separator class="mb-4" />
 		</div>
 
-		{#each $weeksStores as { id, name }}
-			<a href={`/week/${id}`} class="flex items-center gap-2 text-gray-700 dark:text-white">
-				<CalendarDays size={20} />
-				{name}
-			</a>
-			<Separator class="my-2" />
+		{#each $weeksStores as { id, name, isArchived }}
+			{#if !isArchived}
+				<a href={`/week/${id}`} class="flex items-center gap-2 text-gray-700 dark:text-white">
+					<CalendarDays size={20} />
+					{name}
+				</a>
+				<Separator class="my-2" />
+			{/if}
 		{/each}
 	</div>
 </ScrollArea>
