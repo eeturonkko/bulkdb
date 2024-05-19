@@ -15,6 +15,13 @@
       "when": 1714736957808,
       "tag": "0001_short_stark_industries",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1716109120881,
+      "tag": "0002_broad_marvel_boy",
+      "breakpoints": true
     }
   ]
 }
