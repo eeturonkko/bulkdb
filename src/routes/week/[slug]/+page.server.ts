@@ -1,10 +1,10 @@
 import { db } from '$lib/db/index';
 import { eq } from 'drizzle-orm';
 import { redirect } from '@sveltejs/kit';
-import { validateId } from '$lib/formSchema';
+import { validateComment, validateId } from '$lib/formSchema';
 import { zod } from 'sveltekit-superforms/adapters';
 import { superValidate } from 'sveltekit-superforms';
-import { weeks, dailyWeights } from '$lib/db/schema';
+import { weeks, dailyWeights, comments } from '$lib/db/schema';
 import type { PageServerLoad, Actions } from './$types';
 
 export const load: PageServerLoad = async ({ params }) => {
@@ -17,7 +17,11 @@ export const load: PageServerLoad = async ({ params }) => {
 		weights: await db
 			.select()
 			.from(dailyWeights)
-			.where(eq(dailyWeights.weekId, parseInt(slug)))
+			.where(eq(dailyWeights.weekId, parseInt(slug))),
+		comments: await db
+			.select()
+			.from(comments)
+			.where(eq(comments.weekId, parseInt(slug)))
 	};
 };
 
@@ -48,12 +52,13 @@ export const actions: Actions = {
 		const { id } = form.data;
 		await db.update(weeks).set({ isArchived: true }).where(eq(weeks.id, id));
 		redirect(303, '/archive');
+	},
+
+	addComment: async (event) => {
+		const form = await superValidate(event, zod(validateComment));
+		const { text, weekId } = form.data;
+		const createdAt = new Date();
+		await db.insert(comments).values({ text, createdAt, weekId });
+		return { status: 200, message: 'Comment added successfully' };
 	}
-	//TODO: Add comment functionality
-	/* addComment: async (event) => {
-    const form = await superValidate(event, zod(validateId));
-    const { text, weekId } = form.data;
-    await db.insert(comments).values({ text, weekId });
-    return { status: 200, message: 'Comment added successfully' };
-  } */
 };

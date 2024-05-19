@@ -15,5 +15,13 @@ export const dailyWeights = pgTable('daily_weight', {
 	weekId: serial('week_id').references(() => weeks.id)
 });
 
+export const comments = pgTable('comments', {
+	id: serial('id').primaryKey(),
+	text: text('text').notNull(),
+	createdAt: date('created_at', { mode: 'date' }),
+	weekId: serial('week_id').references(() => weeks.id)
+});
+
 export type Week = typeof weeks.$inferSelect;
+export type Comment = typeof comments.$inferSelect;
 export type DailyWeight = typeof dailyWeights.$inferSelect;

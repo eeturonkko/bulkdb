@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { Archive, SquareX } from 'lucide-svelte';
+	import { SquareX } from 'lucide-svelte';
 	import type { PageData } from './$types';
 	import { Badge } from '$lib/components/ui/badge';
 	import * as Table from '$lib/components/ui/table';
@@ -23,6 +23,7 @@
 		data.weights.reduce((acc, { weight }) => acc + weight, 0) / data.weights.length
 	).toFixed(2);
 	$: weightChangeColor = getColorByWeightChange(totalWeightChange);
+	$: comments = data.comments;
 </script>
 
 <svelte:head>
@@ -86,6 +87,6 @@
 			{averageWeight}
 			{averageWeightChange}
 		/>
-		<WeekComments />
+		<WeekComments weekId={data.week[0]?.id} {comments} />
 	</div>
 </main>

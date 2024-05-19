@@ -15,6 +15,12 @@ export const validateId = z.object({
 	id: z.number()
 });
 
-export type NewWeekFormSchema = typeof newWeekFormSchema;
+export const validateComment = z.object({
+	text: z.string().min(2).max(200),
+	weekId: z.number()
+});
+
 export type ValidateId = typeof validateId;
+export type ValidateComment = typeof validateComment;
+export type NewWeekFormSchema = typeof newWeekFormSchema;
 export type NewDailyWeightFormSchema = typeof newDailyWeightFormSchema;
