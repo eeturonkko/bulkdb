@@ -1,5 +1,8 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
+	import { Button } from '$lib/components/ui/button';
 	import * as Table from '$lib/components/ui/table';
+	import { ArchiveRestore } from 'lucide-svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -26,12 +29,11 @@
 							<Table.Cell>
 								<a href={`/week/${week.id}`}>{week.name}</a>
 							</Table.Cell>
-
 							<Table.Cell>
-								<!--  <form use:enhance action="?/deleteWeightEntry" method="post">
-              <input type="hidden" name="id" value={weight.id} />
-              <Button variant="ghost" type="submit"><SquareX /></Button>
-            </form> -->
+								<form use:enhance action="?/restoreWeek" method="post">
+									<input type="hidden" name="id" value={week.id} />
+									<Button variant="ghost" type="submit"><ArchiveRestore size={20} /></Button>
+								</form>
 							</Table.Cell>
 						</Table.Row>
 					{/if}
