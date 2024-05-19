@@ -24,8 +24,10 @@
 					class="block h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:border-ring focus:outline-none focus:ring focus:ring-opacity-50 dark:text-gray-400"
 				>
 					<option disabled selected>Select week</option>
-					{#each $weeksStore as { id, name }}
-						<option value={id}>{name}</option>
+					{#each $weeksStore as { id, name, isArchived }}
+						{#if !isArchived}
+							<option value={id}>{name}</option>
+						{/if}
 					{/each}
 				</select>
 			</div>
