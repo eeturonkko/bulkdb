@@ -42,5 +42,11 @@ export const actions: Actions = {
 			db.delete(weeks).where(eq(weeks.id, id))
 		]);
 		redirect(303, '/');
+	},
+	archiveWeek: async (event) => {
+		const form = await superValidate(event, zod(deleteWeightEntryOrWeek));
+		const { id } = form.data;
+		await db.update(weeks).set({ isArchived: true }).where(eq(weeks.id, id));
+		redirect(303, '/archive');
 	}
 };

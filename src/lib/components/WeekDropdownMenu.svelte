@@ -11,6 +11,12 @@
 	<DropdownMenu.Content>
 		<DropdownMenu.Group>
 			<DropdownMenu.Item>
+				<form use:enhance action="?/archiveWeek" method="post">
+					<input type="hidden" name="id" value={weekId} />
+					<button type="submit">Archive week</button>
+				</form>
+			</DropdownMenu.Item>
+			<DropdownMenu.Item>
 				<form use:enhance action="?/deleteWeek" method="post">
 					<input type="hidden" name="id" value={weekId} />
 					<button type="submit">Delete week</button>

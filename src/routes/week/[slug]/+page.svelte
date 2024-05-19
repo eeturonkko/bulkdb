@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { SquareX } from 'lucide-svelte';
+	import { Archive, SquareX } from 'lucide-svelte';
 	import type { PageData } from './$types';
 	import { Badge } from '$lib/components/ui/badge';
 	import * as Table from '$lib/components/ui/table';
