@@ -1,5 +1,5 @@
 import { db } from '$lib/db/index';
-import { eq } from 'drizzle-orm';
+import { desc, eq } from 'drizzle-orm';
 import { redirect } from '@sveltejs/kit';
 import { validateComment, validateId } from '$lib/formSchema';
 import { zod } from 'sveltekit-superforms/adapters';
@@ -14,7 +14,10 @@ export const load: PageServerLoad = async ({ params }) => {
 	const [week, weights, commentsList] = await Promise.all([
 		db.select().from(weeks).where(eq(weeks.id, weekId)),
 		db.select().from(dailyWeights).where(eq(dailyWeights.weekId, weekId)),
-		db.select().from(comments).where(eq(comments.weekId, weekId))
+		db.query.comments.findMany({
+			where: (table, { eq }) => eq(table.weekId, weekId),
+			orderBy: [desc(comments.id)]
+		})
 	]);
 
 	return {
