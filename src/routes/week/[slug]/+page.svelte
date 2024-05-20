@@ -8,7 +8,7 @@
 	import WeightChange from '$lib/components/WeightChange.svelte';
 	import WeekComments from '$lib/components/WeekComments.svelte';
 	import WeekDropdownMenu from '$lib/components/WeekDropdownMenu.svelte';
-	import { getColorByWeightChange, calculateDifferences, formatDate } from '$lib/utils/functions';
+	import { calculateDifferences, formatDate } from '$lib/utils/functions';
 
 	export let data: PageData;
 
@@ -17,13 +17,15 @@
 
 	$: startingWeight = data.weights[0]?.weight || 0;
 	$: currentWeight = data.weights[data.weights.length - 1]?.weight || 0;
-	$: totalWeightChange = +(currentWeight - startingWeight).toFixed(2);
-	$: averageWeightChange = +(totalWeightChange / data.weights.length).toFixed(2);
 	$: averageWeight = +(
 		data.weights.reduce((acc, { weight }) => acc + weight, 0) / data.weights.length
 	).toFixed(2);
-	$: weightChangeColor = getColorByWeightChange(totalWeightChange);
 	$: comments = data.comments;
+
+	// Save these for possible future use
+	/*  $: averageWeightChange = +(totalWeightChange / data.weights.length).toFixed(2);
+	$: weightChangeColor = getColorByWeightChange(totalWeightChange);
+  $: totalWeightChange = +(currentWeight - startingWeight).toFixed(2); */
 </script>
 
 <svelte:head>
@@ -80,13 +82,7 @@
 		</Table.Root>
 	</div>
 	<div class="flex flex-col items-center gap-4">
-		<WeightChange
-			{startingWeight}
-			{currentWeight}
-			{weightChangeColor}
-			{averageWeight}
-			{averageWeightChange}
-		/>
+		<WeightChange {startingWeight} {currentWeight} {averageWeight} />
 		<WeekComments weekId={data.week[0]?.id} {comments} />
 	</div>
 </main>
