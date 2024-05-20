@@ -1,11 +1,11 @@
 import { db } from '$lib/db/index';
 import { desc, eq } from 'drizzle-orm';
 import { redirect } from '@sveltejs/kit';
-import { validateComment, validateId } from '$lib/formSchema';
 import { zod } from 'sveltekit-superforms/adapters';
 import { superValidate } from 'sveltekit-superforms';
-import { weeks, dailyWeights, comments } from '$lib/db/schema';
 import type { PageServerLoad, Actions } from './$types';
+import { validateComment, validateId } from '$lib/formSchema';
+import { weeks, dailyWeights, comments } from '$lib/db/schema';
 
 export const load: PageServerLoad = async ({ params }) => {
 	const { slug } = params;
@@ -40,6 +40,7 @@ export const actions: Actions = {
 			}
 		}
 	},
+
 	deleteWeek: async (event) => {
 		const form = await superValidate(event, zod(validateId));
 		const { id } = form.data;
@@ -50,6 +51,7 @@ export const actions: Actions = {
 		]);
 		redirect(303, '/');
 	},
+
 	archiveWeek: async (event) => {
 		const form = await superValidate(event, zod(validateId));
 		const { id } = form.data;
