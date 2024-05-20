@@ -23,15 +23,15 @@
 				</Table.Row>
 			</Table.Header>
 			<Table.Body>
-				{#each data.weeks as week}
-					{#if week.isArchived}
+				{#each data.weeks as { id, name, isArchived }}
+					{#if isArchived}
 						<Table.Row>
 							<Table.Cell>
-								<a href={`/week/${week.id}`}>{week.name}</a>
+								<a href={`/week/${id}`}>{name}</a>
 							</Table.Cell>
 							<Table.Cell>
 								<form use:enhance action="?/restoreWeek" method="post">
-									<input type="hidden" name="id" value={week.id} />
+									<input type="hidden" name="id" value={id} />
 									<Button variant="ghost" type="submit"><ArchiveRestore size={20} /></Button>
 								</form>
 							</Table.Cell>
