@@ -44,11 +44,7 @@ export const actions: Actions = {
 	deleteWeek: async (event) => {
 		const form = await superValidate(event, zod(validateId));
 		const { id } = form.data;
-		await Promise.all([
-			db.delete(dailyWeights).where(eq(dailyWeights.weekId, id)),
-			db.delete(comments).where(eq(comments.weekId, id)),
-			db.delete(weeks).where(eq(weeks.id, id))
-		]);
+		await db.delete(weeks).where(eq(weeks.id, id));
 		redirect(303, '/');
 	},
 

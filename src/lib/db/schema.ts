@@ -12,7 +12,9 @@ export const dailyWeights = pgTable('daily_weight', {
 	id: serial('id').primaryKey(),
 	weight: real('weight').notNull(),
 	date: date('date', { mode: 'date' }),
-	weekId: serial('week_id').references(() => weeks.id)
+	weekId: serial('week_id').references(() => weeks.id, {
+		onDelete: 'cascade'
+	})
 });
 
 export const comments = pgTable('comments', {
@@ -20,7 +22,9 @@ export const comments = pgTable('comments', {
 	text: text('text').notNull(),
 	createdAt: date('created_at', { mode: 'date' }),
 	timestamp: timestamp('timestamp').notNull().defaultNow(),
-	weekId: serial('week_id').references(() => weeks.id)
+	weekId: serial('week_id').references(() => weeks.id, {
+		onDelete: 'cascade'
+	})
 });
 
 export type Week = typeof weeks.$inferSelect;
