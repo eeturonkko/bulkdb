@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import type { PageData } from './$types';
+	import { ArchiveRestore } from 'lucide-svelte';
 	import { Button } from '$lib/components/ui/button';
 	import * as Table from '$lib/components/ui/table';
-	import { ArchiveRestore } from 'lucide-svelte';
-	import type { PageData } from './$types';
+	import * as Tooltip from '$lib/components/ui/tooltip';
 
 	export let data: PageData;
 </script>
@@ -30,10 +31,17 @@
 								<a href={`/week/${id}`}>{name}</a>
 							</Table.Cell>
 							<Table.Cell>
-								<form use:enhance action="?/restoreWeek" method="post">
-									<input type="hidden" name="id" value={id} />
-									<Button variant="ghost" type="submit"><ArchiveRestore size={20} /></Button>
-								</form>
+								<Tooltip.Root>
+									<Tooltip.Trigger>
+										<form use:enhance action="?/restoreWeek" method="post">
+											<input type="hidden" name="id" value={id} />
+											<Button variant="ghost" type="submit"><ArchiveRestore size={20} /></Button>
+										</form>
+									</Tooltip.Trigger>
+									<Tooltip.Content>
+										<p>Restore week</p>
+									</Tooltip.Content>
+								</Tooltip.Root>
 							</Table.Cell>
 						</Table.Row>
 					{/if}
