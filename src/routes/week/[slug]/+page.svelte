@@ -1,13 +1,11 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
-	import { SquareX } from 'lucide-svelte';
 	import type { PageData } from './$types';
 	import { Badge } from '$lib/components/ui/badge';
 	import * as Table from '$lib/components/ui/table';
-	import Button from '$lib/components/ui/button/button.svelte';
 	import WeightChange from '$lib/components/WeightChange.svelte';
 	import WeekComments from '$lib/components/WeekComments.svelte';
 	import WeekDropdownMenu from '$lib/components/WeekDropdownMenu.svelte';
+	import WeightDropdowMenu from '$lib/components/WeightDropdowMenu.svelte';
 	import { calculateDifferences, formatDate } from '$lib/utils/functions';
 
 	export let data: PageData;
@@ -71,10 +69,7 @@
 							</span>
 						</Table.Cell>
 						<Table.Cell>
-							<form use:enhance action="?/deleteWeightEntry" method="post">
-								<input type="hidden" name="id" value={weight.id} />
-								<Button variant="ghost" type="submit"><SquareX /></Button>
-							</form>
+							<WeightDropdowMenu weightId={weight.id} />
 						</Table.Cell>
 					</Table.Row>
 				{/each}
