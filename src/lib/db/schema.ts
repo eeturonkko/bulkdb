@@ -1,4 +1,13 @@
-import { date, pgTable, text, real, serial, boolean, timestamp } from 'drizzle-orm/pg-core';
+import {
+	date,
+	pgTable,
+	text,
+	real,
+	serial,
+	boolean,
+	timestamp,
+	integer
+} from 'drizzle-orm/pg-core';
 
 export const weeks = pgTable('weeks', {
 	id: serial('id').primaryKey(),
@@ -49,8 +58,8 @@ export const exerciseLogs = pgTable('exercise_logs', {
 		onDelete: 'cascade'
 	}),
 	weight: real('weight').notNull(),
-	reps: real('reps').notNull(),
-	sets: real('sets').notNull(),
+	reps: integer('reps').notNull(),
+	sets: integer('sets').notNull(),
 	createdAt: timestamp('created_at').defaultNow()
 });
 
