@@ -1,17 +1,15 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-
-	import Label from './ui/label/label.svelte';
-	import Input from './ui/input/input.svelte';
-	import Button from './ui/button/button.svelte';
-	import * as Card from '$lib/components/ui/card';
-
+	import { Label } from '$lib/components/ui/label';
+	import { Input } from '$lib/components/ui/input';
+	import { Button } from '$lib/components/ui/button';
 	import { weeksStore } from '../../store';
 </script>
 
-<Card.Root class="mt-8  py-6">
-	<Card.Content class="space-y-4 text-start">
-		<form use:enhance action="?/addNewDailyWeight" class="space-y-4" method="post">
+<div class="rounded-lg px-6 shadow-md">
+	<form use:enhance class="space-y-4 py-6" action="?/addNewDailyWeight" method="post">
+		<div class="space-y-4 text-start">
+			<h2 class="text-lg font-medium">Add Daily Weight</h2>
 			<div class="space-y-2">
 				<Label for="weight">Weight (kg)</Label>
 				<Input name="weight" id="weight" placeholder="70" type="number" step="0.1" />
@@ -35,7 +33,7 @@
 				<Label for="date">Date</Label>
 				<Input type="date" name="date" />
 			</div>
-			<Button type="submit" size="lg">Add</Button>
-		</form>
-	</Card.Content>
-</Card.Root>
+			<Button type="submit" size="lg" class="w-full">Add</Button>
+		</div>
+	</form>
+</div>
