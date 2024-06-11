@@ -27,7 +27,9 @@
 						>{period.endDate ? period.endDate.toLocaleDateString() : 'End date not set'}</Table.Cell
 					>
 					<Table.Cell>
-						<Button>View/Edit</Button>
+						<Button>
+							<a href={`/workouts/${period.periodId}`}> View/Edit </a>
+						</Button>
 					</Table.Cell>
 				</Table.Row>
 			{/each}
