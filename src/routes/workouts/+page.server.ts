@@ -1,33 +1,18 @@
 import { db } from '$lib/db/index';
-//import { asc, desc, eq } from 'drizzle-orm';
+import { asc } from 'drizzle-orm';
 import { zod } from 'sveltekit-superforms/adapters';
 import { superValidate } from 'sveltekit-superforms';
-import type { Actions } from './$types';
+import type { Actions, PageServerLoad } from './$types';
 import { newTrackingPeriodFormSchema } from '$lib/formSchema';
 import { trackingPeriods } from '$lib/db/schema';
 
-/* export const load: PageServerLoad = async ({ params }) => {
-	const { slug } = params;
-	const weekId = parseInt(slug);
-
-	const [week, weights, commentsList] = await Promise.all([
-		db.select().from(weeks).where(eq(weeks.id, weekId)),
-		db.query.dailyWeights.findMany({
-			where: (table, { eq }) => eq(table.weekId, weekId),
-			orderBy: [asc(dailyWeights.id)]
-		}),
-		db.query.comments.findMany({
-			where: (table, { eq }) => eq(table.weekId, weekId),
-			orderBy: [desc(comments.id)]
-		})
-	]);
-
+export const load: PageServerLoad = async () => {
 	return {
-		week,
-		weights,
-		comments: commentsList
+		trackingPeriods: await db.query.trackingPeriods.findMany({
+			orderBy: [asc(trackingPeriods.periodId)]
+		})
 	};
-}; */
+};
 
 export const actions: Actions = {
 	addNewTrackingPeriod: async (event) => {
@@ -38,7 +23,7 @@ export const actions: Actions = {
 			await db.insert(trackingPeriods).values({
 				periodName: name,
 				startDate,
-				endDate
+				endDate: !endDate ? null : endDate
 			});
 			return { status: 201, message: 'Tracking period added successfully' };
 		} catch (error) {

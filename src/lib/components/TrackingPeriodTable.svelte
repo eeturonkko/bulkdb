@@ -1,3 +1,8 @@
+<script lang="ts">
+	import type { TrackingPeriod } from '$lib/db/schema';
+	export let trackingPeriods: TrackingPeriod[];
+</script>
+
 <div class="rounded-lg p-6 shadow-md">
 	<h2 class="mb-4 text-xl font-bold">Existing Tracking Periods</h2>
 	<div class="relative w-full overflow-auto">
@@ -27,42 +32,24 @@
 				</tr>
 			</thead>
 			<tbody class="[&amp;_tr:last-child]:border-0">
-				<tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-					<td class="[&amp;:has([role=checkbox])]:pr-0 p-4 align-middle">Winter Cut</td>
-					<td class="[&amp;:has([role=checkbox])]:pr-0 p-4 align-middle">2023-10-01</td>
-					<td class="[&amp;:has([role=checkbox])]:pr-0 p-4 align-middle">2024-04-30</td>
-					<td class="[&amp;:has([role=checkbox])]:pr-0 p-4 align-middle">
-						<button
-							class="inline-flex h-9 items-center justify-center whitespace-nowrap rounded-md border border-input bg-background px-3 text-sm font-medium ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+				{#each trackingPeriods as period}
+					<tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+						<td class="[&amp;:has([role=checkbox])]:pr-0 p-4 align-middle">{period.periodName}</td>
+						<td class="[&amp;:has([role=checkbox])]:pr-0 p-4 align-middle"
+							>{period.startDate.toLocaleDateString()}</td
 						>
-							View/Edit
-						</button>
-					</td>
-				</tr>
-				<tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-					<td class="[&amp;:has([role=checkbox])]:pr-0 p-4 align-middle">Summer Bulk</td>
-					<td class="[&amp;:has([role=checkbox])]:pr-0 p-4 align-middle">2023-07-01</td>
-					<td class="[&amp;:has([role=checkbox])]:pr-0 p-4 align-middle">2023-07-31</td>
-					<td class="[&amp;:has([role=checkbox])]:pr-0 p-4 align-middle">
-						<button
-							class="inline-flex h-9 items-center justify-center whitespace-nowrap rounded-md border border-input bg-background px-3 text-sm font-medium ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+						<td class="[&amp;:has([role=checkbox])]:pr-0 p-4 align-middle"
+							>{period.endDate ? period.endDate.toLocaleDateString() : 'no end date added'}</td
 						>
-							View/Edit
-						</button>
-					</td>
-				</tr>
-				<tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-					<td class="[&amp;:has([role=checkbox])]:pr-0 p-4 align-middle">Fall Mini Cut</td>
-					<td class="[&amp;:has([role=checkbox])]:pr-0 p-4 align-middle">2023-08-01</td>
-					<td class="[&amp;:has([role=checkbox])]:pr-0 p-4 align-middle">2023-08-31</td>
-					<td class="[&amp;:has([role=checkbox])]:pr-0 p-4 align-middle">
-						<button
-							class="inline-flex h-9 items-center justify-center whitespace-nowrap rounded-md border border-input bg-background px-3 text-sm font-medium ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-						>
-							View/Edit
-						</button>
-					</td>
-				</tr>
+						<td class="[&amp;:has([role=checkbox])]:pr-0 p-4 align-middle">
+							<button
+								class="inline-flex h-9 items-center justify-center whitespace-nowrap rounded-md border border-input bg-background px-3 text-sm font-medium ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+							>
+								View/Edit
+							</button>
+						</td>
+					</tr>
+				{/each}
 			</tbody>
 		</table>
 	</div>

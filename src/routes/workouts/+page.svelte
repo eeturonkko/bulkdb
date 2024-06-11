@@ -1,6 +1,8 @@
 <script lang="ts">
 	import TrackingPeriodForm from '$lib/components/TrackingPeriodForm.svelte';
 	import TrackingPeriodTable from '$lib/components/TrackingPeriodTable.svelte';
+	export let data;
+	$: trackingPeriods = data.trackingPeriods;
 </script>
 
 <svelte:head>
@@ -13,6 +15,6 @@
 			<h2 class="mb-4 text-xl font-bold">Create New Tracking Period</h2>
 			<TrackingPeriodForm />
 		</div>
-		<TrackingPeriodTable />
+		<TrackingPeriodTable {trackingPeriods} />
 	</div>
 </div>
