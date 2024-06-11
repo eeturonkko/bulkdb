@@ -20,5 +20,5 @@
 			<Input type="date" id="endDate" name="endDate" />
 		</div>
 	</div>
-	<Button type="submit">Create Tracking Period</Button>
+	<Button class="w-full" type="submit">Create Tracking Period</Button>
 </form>

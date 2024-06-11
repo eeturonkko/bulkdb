@@ -26,7 +26,14 @@ export const newTrackingPeriodFormSchema = z.object({
 	endDate: z.date().optional()
 });
 
+export const newExerciseFormSchema = z.object({
+	exercise: z.string().min(2).max(50),
+	description: z.string().min(2).max(200)
+});
+
 export type ValidateId = typeof validateId;
 export type ValidateComment = typeof validateComment;
 export type NewWeekFormSchema = typeof newWeekFormSchema;
+export type NewExerciseFormSchema = typeof newExerciseFormSchema;
 export type NewDailyWeightFormSchema = typeof newDailyWeightFormSchema;
+export type NewTrackingPeriodFormSchema = typeof newTrackingPeriodFormSchema;

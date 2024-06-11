@@ -3,8 +3,8 @@ import { asc } from 'drizzle-orm';
 import { zod } from 'sveltekit-superforms/adapters';
 import { superValidate } from 'sveltekit-superforms';
 import type { Actions, PageServerLoad } from './$types';
-import { newTrackingPeriodFormSchema } from '$lib/formSchema';
-import { trackingPeriods } from '$lib/db/schema';
+import { trackingPeriods, exercises } from '$lib/db/schema';
+import { newTrackingPeriodFormSchema, newExerciseFormSchema } from '$lib/formSchema';
 
 export const load: PageServerLoad = async () => {
 	return {
@@ -18,7 +18,6 @@ export const actions: Actions = {
 	addNewTrackingPeriod: async (event) => {
 		const form = await superValidate(event, zod(newTrackingPeriodFormSchema));
 		const { name, startDate, endDate } = form.data;
-
 		try {
 			await db.insert(trackingPeriods).values({
 				periodName: name,
@@ -29,6 +28,22 @@ export const actions: Actions = {
 		} catch (error) {
 			if (error instanceof Error) {
 				return { status: 500, error: 'Failed to add new tracking period' };
+			}
+		}
+	},
+
+	addNewExercise: async (event) => {
+		const form = await superValidate(event, zod(newExerciseFormSchema));
+		const { exercise, description } = form.data;
+		try {
+			await db.insert(exercises).values({
+				exerciseName: exercise,
+				exerciseDescription: description
+			});
+			return { status: 201, message: 'Exercise added successfully' };
+		} catch (error) {
+			if (error instanceof Error) {
+				return { status: 500, error: 'Failed to add new exercise' };
 			}
 		}
 	}
