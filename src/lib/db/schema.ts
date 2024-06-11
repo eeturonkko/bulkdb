@@ -46,7 +46,7 @@ export const trackingPeriods = pgTable('tracking_periods', {
 	periodId: serial('period_id').primaryKey(),
 	periodName: text('period_name').notNull(),
 	startDate: timestamp('start_date').notNull().defaultNow(),
-	endDate: timestamp('end_date').defaultNow()
+	endDate: timestamp('end_date')
 });
 
 export const exerciseLogs = pgTable('exercise_logs', {

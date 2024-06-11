@@ -20,6 +20,12 @@ export const validateComment = z.object({
 	weekId: z.number()
 });
 
+export const newTrackingPeriodFormSchema = z.object({
+	name: z.string().min(2).max(50),
+	startDate: z.date(),
+	endDate: z.date().optional()
+});
+
 export type ValidateId = typeof validateId;
 export type ValidateComment = typeof validateComment;
 export type NewWeekFormSchema = typeof newWeekFormSchema;
