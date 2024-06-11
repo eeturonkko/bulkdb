@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { TrackingPeriod } from '$lib/db/schema';
 	export let trackingPeriods: TrackingPeriod[];
+	import type { TrackingPeriod } from '$lib/db/schema';
 </script>
 
 <div class="rounded-lg p-6 shadow-md">
@@ -39,7 +39,7 @@
 							>{period.startDate.toLocaleDateString()}</td
 						>
 						<td class="[&amp;:has([role=checkbox])]:pr-0 p-4 align-middle"
-							>{period.endDate ? period.endDate.toLocaleDateString() : 'no end date added'}</td
+							>{period.endDate ? period.endDate.toLocaleDateString() : 'End date not set'}</td
 						>
 						<td class="[&amp;:has([role=checkbox])]:pr-0 p-4 align-middle">
 							<button
