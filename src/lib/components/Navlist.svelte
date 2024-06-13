@@ -14,9 +14,9 @@
 	<div class="p-4">
 		<div class="flex flex-col items-start justify-center gap-4">
 			<div class=" flex w-full items-center justify-between">
-				<a href="/"><Home /></a>
 				<ThemeToggleButton />
 			</div>
+			<a class="flex items-center gap-2 text-gray-700 dark:text-white" href="/"><Home />Home </a>
 			<a class="flex items-center gap-2 text-gray-700 dark:text-white" href="/analytics">
 				<AreaChart /> Analytics</a
 			>
