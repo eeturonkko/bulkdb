@@ -14,6 +14,9 @@
 	<div class="p-4">
 		<div class="flex flex-col items-start justify-center gap-4">
 			<div class=" flex w-full items-center justify-between">
+				<div class="flex h-10 w-24 items-center justify-center rounded-sm bg-red-800">
+					<span class="font-bold tracking-wide text-white">Bulkdb</span>
+				</div>
 				<ThemeToggleButton />
 			</div>
 			<a class="flex items-center gap-2 text-gray-700 dark:text-white" href="/"><Home />Home </a>

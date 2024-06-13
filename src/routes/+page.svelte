@@ -7,9 +7,8 @@
 </svelte:head>
 
 <div class="flex flex-col items-center text-center tracking-wide">
-	<h1 class="text-3xl font-bold">Bulkdb</h1>
-	<p class="mb-8 text-lg text-gray-700 dark:text-white">
-		Start by adding a new week or add your daily weight
-	</p>
+	<div class="text-start">
+		<h1 class="mb-4 text-start text-3xl font-bold">Welcome to Bulkdb!</h1>
+	</div>
 	<FormTabs />
 </div>
