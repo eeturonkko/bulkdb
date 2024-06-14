@@ -31,5 +31,6 @@ export function calculateDifferences(
 
 export function formatDate(date: Date | null): string {
 	if (!date) return 'No Date';
-	return new Date(date).toISOString().split('T')[0]; // outputs YYYY-MM-DD
+	const [year, month, day] = new Date(date).toISOString().split('T')[0].split('-');
+	return `${day}/${month}/${year}`;
 }

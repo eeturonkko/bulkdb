@@ -1,11 +1,22 @@
 <script lang="ts">
+	import { formatDate } from '$lib/utils/functions.js';
 	export let data;
+	$: trackingPeriod = data.trackingPeriod[0];
 </script>
 
 <svelte:head>
-	<title>Bulkdb | Tracking period {data.trackingPeriodId}</title>
+	<title>Bulkdb | {trackingPeriod.periodName}</title>
 </svelte:head>
 
-<div class="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
-	<h2>Tracking period {data.trackingPeriodId}</h2>
-</div>
+<main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
+	<div class="flex items-center justify-between">
+		<div class="space-y-4">
+			<h2 class="text-lg font-semibold md:text-2xl">{trackingPeriod.periodName}</h2>
+			<p>
+				{formatDate(trackingPeriod.startDate)} - {trackingPeriod.endDate
+					? formatDate(trackingPeriod.endDate)
+					: 'Present'}
+			</p>
+		</div>
+	</div>
+</main>

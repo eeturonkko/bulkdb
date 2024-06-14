@@ -1,16 +1,15 @@
-/* import { db } from '$lib/db/index';
-import { asc, desc, eq } from 'drizzle-orm';
-import { redirect } from '@sveltejs/kit';
-import { zod } from 'sveltekit-superforms/adapters';
-import { superValidate } from 'sveltekit-superforms'; */
+import { db } from '$lib/db/index';
+import { eq } from 'drizzle-orm';
 import type { PageServerLoad } from './$types';
-/* import { validateComment, validateId } from '$lib/formSchema';
-import { weeks, dailyWeights, comments } from '$lib/db/schema'; */
+import { trackingPeriods } from '$lib/db/schema';
 
 export const load: PageServerLoad = async ({ params }) => {
 	const { slug } = params;
-	const trackingPeriodId = parseInt(slug);
+	const periodId = parseInt(slug);
 	return {
-		trackingPeriodId
+		trackingPeriod: await db
+			.select()
+			.from(trackingPeriods)
+			.where(eq(trackingPeriods.periodId, periodId))
 	};
 };
