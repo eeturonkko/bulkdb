@@ -9,14 +9,12 @@
 </svelte:head>
 
 <main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
-	<div class="flex items-center justify-between">
-		<div class="space-y-4">
-			<h2 class="text-lg font-semibold md:text-2xl">{trackingPeriod.periodName}</h2>
-			<p>
-				{formatDate(trackingPeriod.startDate)} - {trackingPeriod.endDate
-					? formatDate(trackingPeriod.endDate)
-					: 'Present'}
-			</p>
-		</div>
+	<div class="flex flex-col items-start">
+		<h2 class="font-semibold md:text-2xl">{trackingPeriod.periodName}</h2>
+		<p class="text-muted-foreground">
+			{formatDate(trackingPeriod.startDate)} - {trackingPeriod.endDate
+				? formatDate(trackingPeriod.endDate)
+				: 'Present'}
+		</p>
 	</div>
 </main>
