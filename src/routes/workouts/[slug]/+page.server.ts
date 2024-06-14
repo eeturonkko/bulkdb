@@ -15,10 +15,4 @@ export const load: PageServerLoad = async ({ params }) => {
 		trackingPeriod: period,
 		exercises: exercisesList
 	};
-	/* return {
-		trackingPeriod: await db
-			.select()
-			.from(trackingPeriods)
-			.where(eq(trackingPeriods.periodId, periodId))
-	}; */
 };
