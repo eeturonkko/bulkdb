@@ -1,16 +1,17 @@
 <script lang="ts">
 	import { formatDate } from '$lib/utils/functions.js';
 	import ExecrciseAccordion from '$lib/components/ExecrciseAccordion.svelte';
-
+	import Separator from '$lib/components/ui/separator/separator.svelte';
 	export let data;
 	$: trackingPeriod = data.trackingPeriod[0];
+	$: exercises = data.exercises;
 </script>
 
 <svelte:head>
 	<title>Bulkdb | {trackingPeriod.periodName}</title>
 </svelte:head>
 
-<main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
+<main class="flex flex-1 flex-col md:gap-8 md:p-6">
 	<section class="flex flex-col items-start">
 		<h2 class="font-semibold md:text-2xl">{trackingPeriod.periodName}</h2>
 		<p class="text-muted-foreground">
@@ -19,10 +20,11 @@
 				: 'Present'}
 		</p>
 	</section>
+	<Separator />
 	<h2 class="font-semibold md:text-2xl">Tracked Exercises</h2>
 	<div class="flex gap-6">
 		<section class="flex-1">
-			<ExecrciseAccordion />
+			<ExecrciseAccordion {exercises} />
 		</section>
 	</div>
 </main>

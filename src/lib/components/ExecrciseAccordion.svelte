@@ -1,30 +1,34 @@
 <script lang="ts">
 	import * as Accordion from '$lib/components/ui/accordion';
+	import type { Exercise } from '$lib/db/schema';
+
+	export let exercises: Exercise[];
+
+	// Split exercises into two halves for rendering in two sections
+	const half = Math.ceil(exercises.length / 2);
+	const firstHalf = exercises.slice(0, half);
+	const secondHalf = exercises.slice(half);
 </script>
 
 <div class="flex gap-6">
 	<section class="flex-1">
-		<Accordion.Root>
-			<Accordion.Item value="Incline Machine Press">
-				<Accordion.Trigger>Incline Machine Press</Accordion.Trigger>
-				<Accordion.Content>3 sets of 10 reps</Accordion.Content>
-			</Accordion.Item>
-			<Accordion.Item value="Belt squat">
-				<Accordion.Trigger>Belt squat</Accordion.Trigger>
-				<Accordion.Content>3 sets of 10 reps</Accordion.Content>
-			</Accordion.Item>
-		</Accordion.Root>
+		{#each firstHalf as { exerciseName, exerciseDescription }}
+			<Accordion.Root>
+				<Accordion.Item value={exerciseName}>
+					<Accordion.Trigger>{exerciseName}</Accordion.Trigger>
+					<Accordion.Content class="overflow-clip">{exerciseDescription}</Accordion.Content>
+				</Accordion.Item>
+			</Accordion.Root>
+		{/each}
 	</section>
 	<section class="flex-1">
-		<Accordion.Root>
-			<Accordion.Item value="Seated Machine Press">
-				<Accordion.Trigger>Seated Machine Press</Accordion.Trigger>
-				<Accordion.Content>3 sets of 10 reps</Accordion.Content>
-			</Accordion.Item>
-			<Accordion.Item value="Lat pullover Machine">
-				<Accordion.Trigger>Lat pullover Machine</Accordion.Trigger>
-				<Accordion.Content>3 sets of 10 reps</Accordion.Content>
-			</Accordion.Item>
-		</Accordion.Root>
+		{#each secondHalf as { exerciseName, exerciseDescription }}
+			<Accordion.Root>
+				<Accordion.Item value={exerciseName}>
+					<Accordion.Trigger>{exerciseName}</Accordion.Trigger>
+					<Accordion.Content class="overflow-clip">{exerciseDescription}</Accordion.Content>
+				</Accordion.Item>
+			</Accordion.Root>
+		{/each}
 	</section>
 </div>
