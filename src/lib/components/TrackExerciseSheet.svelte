@@ -1,6 +1,12 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
+	import Label from './ui/label/label.svelte';
+	import type { Exercise } from '$lib/db/schema';
 	import * as Sheet from '$lib/components/ui/sheet';
 	import { Button } from '$lib/components/ui/button';
+	import Separator from './ui/separator/separator.svelte';
+
+	export let exercises: Exercise[];
 </script>
 
 <Sheet.Root>
@@ -13,6 +19,21 @@
 			<Sheet.Description>
 				Select an exercice from the list to add to the tracking period
 			</Sheet.Description>
+			<Separator />
+			<form class="space-y-3" use:enhance method="post" action="?/trackExercise">
+				<Label class="sr-only" for="exercise">Exercise</Label>
+				<select
+					id="week"
+					name="week"
+					class="block h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:border-ring focus:outline-none focus:ring focus:ring-opacity-50 dark:text-gray-400"
+				>
+					<option disabled selected>Select week</option>
+					{#each exercises as { exerciseId, exerciseName }}
+						<option value={exerciseId}>{exerciseName}</option>
+					{/each}
+				</select>
+				<Button type="submit">Track exercise</Button>
+			</form>
 		</Sheet.Header>
 	</Sheet.Content>
 </Sheet.Root>

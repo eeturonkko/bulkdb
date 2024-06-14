@@ -23,7 +23,7 @@
 					: 'Present'}
 			</p>
 		</div>
-		<TrackExerciseSheet />
+		<TrackExerciseSheet {exercises} />
 	</section>
 	<Separator />
 	<h2 class="font-semibold md:text-2xl">Tracked Exercises</h2>
