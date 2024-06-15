@@ -7,6 +7,7 @@
 	export let data;
 	$: trackingPeriod = data.trackingPeriod[0];
 	$: exercises = data.exercises;
+	$: trackedExercises = data.trackedExercises;
 </script>
 
 <svelte:head>
@@ -23,13 +24,13 @@
 					: 'Present'}
 			</p>
 		</div>
-		<TrackExerciseSheet {exercises} />
+		<TrackExerciseSheet {exercises} trackingPeriodId={trackingPeriod.periodId} />
 	</section>
 	<Separator />
 	<h2 class="font-semibold md:text-2xl">Tracked Exercises</h2>
 	<div class="flex gap-6">
 		<section class="flex-1">
-			<ExecrciseAccordion {exercises} />
+			<ExecrciseAccordion {trackedExercises} />
 		</section>
 	</div>
 </main>

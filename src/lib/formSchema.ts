@@ -31,6 +31,11 @@ export const newExerciseFormSchema = z.object({
 	description: z.string().min(2).max(200)
 });
 
+export const newTrackedExerciseFormSchema = z.object({
+	periodId: z.number(),
+	exerciseId: z.number()
+});
+
 export type ValidateId = typeof validateId;
 export type ValidateComment = typeof validateComment;
 export type NewWeekFormSchema = typeof newWeekFormSchema;

@@ -7,6 +7,7 @@
 	import Separator from './ui/separator/separator.svelte';
 
 	export let exercises: Exercise[];
+	export let trackingPeriodId: number;
 </script>
 
 <Sheet.Root>
@@ -23,15 +24,16 @@
 			<form class="space-y-3" use:enhance method="post" action="?/trackExercise">
 				<Label class="sr-only" for="exercise">Exercise</Label>
 				<select
-					id="week"
-					name="week"
+					id="exercise"
+					name="exerciseId"
 					class="block h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:border-ring focus:outline-none focus:ring focus:ring-opacity-50 dark:text-gray-400"
 				>
-					<option disabled selected>Select week</option>
+					<option disabled selected>Select exercise</option>
 					{#each exercises as { exerciseId, exerciseName }}
 						<option value={exerciseId}>{exerciseName}</option>
 					{/each}
 				</select>
+				<input type="hidden" value={trackingPeriodId} name="periodId" />
 				<Button type="submit">Track exercise</Button>
 			</form>
 		</Sheet.Header>
