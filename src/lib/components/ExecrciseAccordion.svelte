@@ -1,31 +1,30 @@
 <script lang="ts">
-	import { ScrollText } from 'lucide-svelte';
 	import type { trackedExercise } from '$lib/types';
+	import type { ExerciseLog } from '$lib/db/schema';
+	import { formatDate } from '$lib/utils/functions';
 	import * as Table from '$lib/components/ui/table';
-	import { Button } from '$lib/components/ui/button';
+	import LogExerciseSheet from './LogExerciseSheet.svelte';
 	import * as Accordion from '$lib/components/ui/accordion';
 
 	export let trackedExercises: trackedExercise[];
+	export let exerciseLogs: ExerciseLog[];
 
 	// Split exercises into two halves for rendering in two sections
 	$: half = Math.ceil(trackedExercises.length / 2);
 	$: firstHalf = trackedExercises.slice(0, half);
 	$: secondHalf = trackedExercises.slice(half);
+
+	console.log(exerciseLogs);
 </script>
 
 <div class="flex gap-6">
 	<section class="flex-1">
-		{#each firstHalf as { exerciseName, description }}
+		{#each firstHalf as { exerciseName, description, trackedExerciseId }}
 			<Accordion.Root>
 				<Accordion.Item value={exerciseName}>
 					<Accordion.Trigger>{exerciseName}</Accordion.Trigger>
 					<Accordion.Content>
-						<Button variant="ghost" class="my-2 border">
-							<div class="flex items-center gap-2">
-								<ScrollText size={14} />
-								<span>Log</span>
-							</div>
-						</Button>
+						<LogExerciseSheet {trackedExerciseId} />
 						<Table.Root>
 							<Table.Caption class="text-start">{description}</Table.Caption>
 							<Table.Header>
@@ -37,12 +36,16 @@
 								</Table.Row>
 							</Table.Header>
 							<Table.Body>
-								<Table.Row>
-									<Table.Cell>60kg</Table.Cell>
-									<Table.Cell>12</Table.Cell>
-									<Table.Cell>3</Table.Cell>
-									<Table.Cell>14/06/2024</Table.Cell>
-								</Table.Row>
+								{#each exerciseLogs as log}
+									{#if log.trackedExerciseId === trackedExerciseId}
+										<Table.Row>
+											<Table.Cell>{log.weight} kg</Table.Cell>
+											<Table.Cell>{log.reps}</Table.Cell>
+											<Table.Cell>{log.sets}</Table.Cell>
+											<Table.Cell>{formatDate(log.date)}</Table.Cell>
+										</Table.Row>
+									{/if}
+								{/each}
 							</Table.Body>
 						</Table.Root>
 					</Accordion.Content>
@@ -51,12 +54,12 @@
 		{/each}
 	</section>
 	<section class="flex-1">
-		{#each secondHalf as { exerciseName, description }}
+		{#each secondHalf as { exerciseName, description, trackedExerciseId }}
 			<Accordion.Root>
 				<Accordion.Item value={exerciseName}>
 					<Accordion.Trigger>{exerciseName}</Accordion.Trigger>
 					<Accordion.Content>
-						<Button>Log</Button>
+						<LogExerciseSheet {trackedExerciseId} />
 						<Table.Root>
 							<Table.Caption class="text-start">{description}</Table.Caption>
 							<Table.Header>
@@ -68,15 +71,19 @@
 								</Table.Row>
 							</Table.Header>
 							<Table.Body>
-								<Table.Row>
-									<Table.Cell>60kg</Table.Cell>
-									<Table.Cell>12</Table.Cell>
-									<Table.Cell>3</Table.Cell>
-									<Table.Cell>14/06/2024</Table.Cell>
-								</Table.Row>
+								{#each exerciseLogs as log}
+									{#if log.trackedExerciseId === trackedExerciseId}
+										<Table.Row>
+											<Table.Cell>{log.weight} kg</Table.Cell>
+											<Table.Cell>{log.reps}</Table.Cell>
+											<Table.Cell>{log.sets}</Table.Cell>
+											<Table.Cell>{formatDate(log.date)}</Table.Cell>
+										</Table.Row>
+									{/if}
+								{/each}
 							</Table.Body>
-						</Table.Root></Accordion.Content
-					>
+						</Table.Root>
+					</Accordion.Content>
 				</Accordion.Item>
 			</Accordion.Root>
 		{/each}

@@ -70,6 +70,7 @@ export const exerciseLogs = pgTable('exercise_logs', {
 	weight: real('weight').notNull(),
 	reps: integer('reps').notNull(),
 	sets: integer('sets').notNull(),
+	date: date('date', { mode: 'date' }),
 	createdAt: timestamp('created_at').defaultNow()
 });
 

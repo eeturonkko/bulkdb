@@ -3,13 +3,13 @@ import { eq, asc } from 'drizzle-orm';
 import { zod } from 'sveltekit-superforms/adapters';
 import { superValidate } from 'sveltekit-superforms';
 import type { PageServerLoad, Actions } from './$types';
-import { newTrackedExerciseFormSchema } from '$lib/formSchema';
-import { trackingPeriods, exercises, trackedExercises } from '$lib/db/schema';
+import { trackingPeriods, exercises, trackedExercises, exerciseLogs } from '$lib/db/schema';
+import { newTrackedExerciseFormSchema, newLoggedExerciseFormSchema } from '$lib/formSchema';
 
 export const load: PageServerLoad = async ({ params }) => {
 	const { slug } = params;
 	const periodId = parseInt(slug);
-	const [period, exercisesList, trackedExercisesList] = await Promise.all([
+	const [period, exercisesList, trackedExercisesList, loggedExercises] = await Promise.all([
 		db.select().from(trackingPeriods).where(eq(trackingPeriods.periodId, periodId)),
 		db.query.exercises.findMany({
 			orderBy: [asc(exercises.exerciseName)]
@@ -25,13 +25,17 @@ export const load: PageServerLoad = async ({ params }) => {
 			.from(trackedExercises)
 			.innerJoin(exercises, eq(trackedExercises.exerciseId, exercises.exerciseId))
 			.where(eq(trackedExercises.periodId, periodId))
-			.orderBy(asc(exercises.exerciseName))
+			.orderBy(asc(exercises.exerciseName)),
+		db.query.exerciseLogs.findMany({
+			orderBy: [asc(exerciseLogs.date)]
+		})
 	]);
 
 	return {
 		trackingPeriod: period,
 		exercises: exercisesList,
-		trackedExercises: trackedExercisesList
+		trackedExercises: trackedExercisesList,
+		exerciseLogs: loggedExercises
 	};
 };
 
@@ -45,6 +49,28 @@ export const actions: Actions = {
 		} catch (error) {
 			if (error instanceof Error) {
 				return { status: 500, error: 'Failed to track exercise' };
+			}
+		}
+	},
+
+	logExercise: async (event) => {
+		const form = await superValidate(event, zod(newLoggedExerciseFormSchema));
+
+		const { exerciseId, weight, reps, sets, date } = form.data;
+		try {
+			await db
+				.insert(exerciseLogs)
+				.values({ weight, reps, sets, trackedExerciseId: exerciseId, date });
+			return { status: 200, message: 'Exercise logged successfully' };
+		} catch (error) {
+			console.error('Error logging exercise:', error);
+			if (error instanceof Error) {
+				console.error('Error details:', {
+					message: error.message,
+					name: error.name,
+					stack: error.stack
+				});
+				return { status: 500, error: 'Failed to log exercise' };
 			}
 		}
 	}

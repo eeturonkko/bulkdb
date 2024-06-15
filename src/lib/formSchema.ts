@@ -36,9 +36,17 @@ export const newTrackedExerciseFormSchema = z.object({
 	exerciseId: z.number()
 });
 
+export const newLoggedExerciseFormSchema = z.object({
+	exerciseId: z.number(),
+	weight: z.number(),
+	reps: z.number(),
+	sets: z.number(),
+	date: z.date()
+});
 export type ValidateId = typeof validateId;
 export type ValidateComment = typeof validateComment;
 export type NewWeekFormSchema = typeof newWeekFormSchema;
 export type NewExerciseFormSchema = typeof newExerciseFormSchema;
 export type NewDailyWeightFormSchema = typeof newDailyWeightFormSchema;
 export type NewTrackingPeriodFormSchema = typeof newTrackingPeriodFormSchema;
+export type NewTrackedExerciseFormSchema = typeof newTrackedExerciseFormSchema;

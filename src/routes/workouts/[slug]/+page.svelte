@@ -8,6 +8,7 @@
 	$: trackingPeriod = data.trackingPeriod[0];
 	$: exercises = data.exercises;
 	$: trackedExercises = data.trackedExercises;
+	$: exerciseLogs = data.exerciseLogs;
 </script>
 
 <svelte:head>
@@ -30,7 +31,7 @@
 	<h2 class="font-semibold md:text-2xl">Tracked Exercises</h2>
 	<div class="flex gap-6">
 		<section class="flex-1">
-			<ExecrciseAccordion {trackedExercises} />
+			<ExecrciseAccordion {trackedExercises} {exerciseLogs} />
 		</section>
 	</div>
 </main>
