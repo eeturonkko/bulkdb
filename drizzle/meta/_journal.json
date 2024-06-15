@@ -57,6 +57,13 @@
       "when": 1718028312422,
       "tag": "0007_fresh_madame_web",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1718444631491,
+      "tag": "0008_clean_ezekiel",
+      "breakpoints": true
     }
   ]
 }

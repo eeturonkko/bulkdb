@@ -49,14 +49,24 @@ export const trackingPeriods = pgTable('tracking_periods', {
 	endDate: timestamp('end_date')
 });
 
-export const exerciseLogs = pgTable('exercise_logs', {
-	logId: serial('log_id').primaryKey(),
+export const trackedExercises = pgTable('tracked_exercises', {
+	trackedExerciseId: serial('tracked_exercise_id').primaryKey(),
 	periodId: serial('period_id').references(() => trackingPeriods.periodId, {
 		onDelete: 'cascade'
 	}),
 	exerciseId: serial('exercise_id').references(() => exercises.exerciseId, {
 		onDelete: 'cascade'
-	}),
+	})
+});
+
+export const exerciseLogs = pgTable('exercise_logs', {
+	logId: serial('log_id').primaryKey(),
+	trackedExerciseId: serial('tracked_exercise_id').references(
+		() => trackedExercises.trackedExerciseId,
+		{
+			onDelete: 'cascade'
+		}
+	),
 	weight: real('weight').notNull(),
 	reps: integer('reps').notNull(),
 	sets: integer('sets').notNull(),
@@ -69,3 +79,4 @@ export type Exercise = typeof exercises.$inferSelect;
 export type ExerciseLog = typeof exerciseLogs.$inferSelect;
 export type DailyWeight = typeof dailyWeights.$inferSelect;
 export type TrackingPeriod = typeof trackingPeriods.$inferSelect;
+export type TrackedExercise = typeof trackedExercises.$inferSelect;
