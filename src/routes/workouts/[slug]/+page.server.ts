@@ -1,9 +1,9 @@
 import { db } from '$lib/db/index';
 import { eq, asc } from 'drizzle-orm';
-import { newTrackedExerciseFormSchema } from '$lib/formSchema';
 import { zod } from 'sveltekit-superforms/adapters';
 import { superValidate } from 'sveltekit-superforms';
 import type { PageServerLoad, Actions } from './$types';
+import { newTrackedExerciseFormSchema } from '$lib/formSchema';
 import { trackingPeriods, exercises, trackedExercises } from '$lib/db/schema';
 
 export const load: PageServerLoad = async ({ params }) => {
@@ -25,6 +25,7 @@ export const load: PageServerLoad = async ({ params }) => {
 			.from(trackedExercises)
 			.innerJoin(exercises, eq(trackedExercises.exerciseId, exercises.exerciseId))
 			.where(eq(trackedExercises.periodId, periodId))
+			.orderBy(asc(exercises.exerciseName))
 	]);
 
 	return {
