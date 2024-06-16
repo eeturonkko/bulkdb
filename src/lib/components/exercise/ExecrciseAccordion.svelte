@@ -7,6 +7,7 @@
 	import { Separator } from '$lib/components/ui/separator';
 	import * as Accordion from '$lib/components/ui/accordion';
 	import ExerciseLogDropdownMenu from './ExerciseLogDropdownMenu.svelte';
+	import { Ellipsis } from 'lucide-svelte';
 
 	export let trackedExercises: trackedExercise[];
 	export let exerciseLogs: ExerciseLog[];
@@ -31,6 +32,7 @@
 									<Table.Head>Weight</Table.Head>
 									<Table.Head>Reps</Table.Head>
 									<Table.Head>Date</Table.Head>
+									<Table.Head>Actions</Table.Head>
 								</Table.Row>
 							</Table.Header>
 							<Table.Body>
@@ -40,6 +42,9 @@
 											<Table.Cell>{log.weight} kg</Table.Cell>
 											<Table.Cell>{log.reps}</Table.Cell>
 											<Table.Cell>{formatDate(log.date)}</Table.Cell>
+											<Table.Cell>
+												<Ellipsis />
+											</Table.Cell>
 										</Table.Row>
 									{/if}
 								{/each}
