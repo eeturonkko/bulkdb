@@ -6,6 +6,7 @@
 	import LogExerciseSheet from './LogExerciseSheet.svelte';
 	import { Separator } from '$lib/components/ui/separator';
 	import * as Accordion from '$lib/components/ui/accordion';
+	import ExerciseLogDropdownMenu from './ExerciseLogDropdownMenu.svelte';
 
 	export let trackedExercises: trackedExercise[];
 	export let exerciseLogs: ExerciseLog[];
@@ -18,7 +19,10 @@
 				<Accordion.Item value={exerciseName}>
 					<Accordion.Trigger>{exerciseName}</Accordion.Trigger>
 					<Accordion.Content>
-						<LogExerciseSheet {trackedExerciseId} />
+						<div class="mx-1 flex justify-between">
+							<LogExerciseSheet {trackedExerciseId} />
+							<ExerciseLogDropdownMenu {trackedExerciseId} />
+						</div>
 						<Separator class="mt-2" />
 						<Table.Root>
 							<Table.Caption class="text-start">{description}</Table.Caption>
@@ -52,7 +56,11 @@
 				<Accordion.Item value={exerciseName}>
 					<Accordion.Trigger>{exerciseName}</Accordion.Trigger>
 					<Accordion.Content>
-						<LogExerciseSheet {trackedExerciseId} />
+						<div class="mx-1 flex justify-between">
+							<LogExerciseSheet {trackedExerciseId} />
+							<ExerciseLogDropdownMenu {trackedExerciseId} />
+						</div>
+						<Separator class="mt-2" />
 						<Table.Root>
 							<Table.Caption class="text-start">{description}</Table.Caption>
 							<Table.Header>

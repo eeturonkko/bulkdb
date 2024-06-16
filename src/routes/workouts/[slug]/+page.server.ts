@@ -4,7 +4,11 @@ import { zod } from 'sveltekit-superforms/adapters';
 import { superValidate } from 'sveltekit-superforms';
 import type { PageServerLoad, Actions } from './$types';
 import { trackingPeriods, exercises, trackedExercises, exerciseLogs } from '$lib/db/schema';
-import { newTrackedExerciseFormSchema, newLoggedExerciseFormSchema } from '$lib/formSchema';
+import {
+	newTrackedExerciseFormSchema,
+	newLoggedExerciseFormSchema,
+	validateId
+} from '$lib/formSchema';
 
 export const load: PageServerLoad = async ({ params }) => {
 	const { slug } = params;
@@ -71,6 +75,25 @@ export const actions: Actions = {
 					stack: error.stack
 				});
 				return { status: 500, error: 'Failed to log exercise' };
+			}
+		}
+	},
+
+	removeTrackedExercise: async (event) => {
+		const form = await superValidate(event, zod(validateId));
+		const { id } = form.data;
+		try {
+			await db.delete(trackedExercises).where(eq(trackedExercises.trackedExerciseId, id));
+			return { status: 200, message: 'Exercise removed successfully' };
+		} catch (error) {
+			console.error('Error removing tracked exercise:', error);
+			if (error instanceof Error) {
+				console.error('Error details:', {
+					message: error.message,
+					name: error.name,
+					stack: error.stack
+				});
+				return { status: 500, error: 'Failed to remove exercise' };
 			}
 		}
 	}
