@@ -74,8 +74,17 @@ export const exerciseLogs = pgTable('exercise_logs', {
 	createdAt: timestamp('created_at').defaultNow()
 });
 
+export const workouts = pgTable('workouts', {
+	workoutId: serial('workout_id').primaryKey(),
+	workoutName: text('workout_name').notNull(),
+	workoutDescription: text('workout_description'),
+	caloriesBurned: real('calories_burned').notNull(),
+	duration: real('duration').notNull()
+});
+
 export type Week = typeof weeks.$inferSelect;
 export type Comment = typeof comments.$inferSelect;
+export type Workout = typeof workouts.$inferSelect;
 export type Exercise = typeof exercises.$inferSelect;
 export type ExerciseLog = typeof exerciseLogs.$inferSelect;
 export type DailyWeight = typeof dailyWeights.$inferSelect;

@@ -71,6 +71,13 @@
       "when": 1718453697145,
       "tag": "0009_nice_wendigo",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "6",
+      "when": 1718539774294,
+      "tag": "0010_wandering_tarot",
+      "breakpoints": true
     }
   ]
 }
