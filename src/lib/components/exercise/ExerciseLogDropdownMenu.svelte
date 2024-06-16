@@ -11,12 +11,6 @@
 	<DropdownMenu.Content>
 		<DropdownMenu.Group>
 			<DropdownMenu.Item>
-				<form use:enhance method="post">
-					<input type="hidden" name="id" />
-					<button type="submit">Modify</button>
-				</form>
-			</DropdownMenu.Item>
-			<DropdownMenu.Item>
 				<form use:enhance method="post" action="?/removeTrackedExercise">
 					<input type="hidden" name="id" value={trackedExerciseId} />
 					<button type="submit">Remove exercise</button>
