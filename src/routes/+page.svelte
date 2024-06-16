@@ -1,5 +1,5 @@
 <script lang="ts">
-	import FormTabs from '$lib/components/FormTabs.svelte';
+	import FormTabs from '$lib/components/ui/FormTabs.svelte';
 </script>
 
 <svelte:head>

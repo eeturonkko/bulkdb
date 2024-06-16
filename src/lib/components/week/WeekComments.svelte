@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import Input from './ui/input/input.svelte';
+	import Input from '../ui/input/input.svelte';
 	import avatar from '$lib/assets/avatar.jpg';
 	import { timeAgo } from '$lib/utils/functions';
 	import type { Comment } from '$lib/db/schema';
 
-	import Button from './ui/button/button.svelte';
+	import Button from '../ui/button/button.svelte';
 	import * as Avatar from '$lib/components/ui/avatar';
 
 	export let weekId: number;

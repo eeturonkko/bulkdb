@@ -3,7 +3,7 @@
 	import { Label } from '$lib/components/ui/label';
 	import { Input } from '$lib/components/ui/input';
 	import { Button } from '$lib/components/ui/button';
-	import { weeksStore } from '../../store';
+	import { weeksStore } from '../../../store';
 </script>
 
 <div class="rounded-lg px-6 shadow-md">

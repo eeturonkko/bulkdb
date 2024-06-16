@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { formatDate } from '$lib/utils/functions.js';
 	import Separator from '$lib/components/ui/separator/separator.svelte';
-	import ExecrciseAccordion from '$lib/components/ExecrciseAccordion.svelte';
-	import TrackExerciseSheet from '$lib/components/TrackExerciseSheet.svelte';
+	import ExecrciseAccordion from '$lib/components/exercise/ExecrciseAccordion.svelte';
+	import TrackExerciseSheet from '$lib/components/exercise/TrackExerciseSheet.svelte';
 
 	export let data;
 	$: trackingPeriod = data.trackingPeriod[0];

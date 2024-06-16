@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { weeksStore } from '../../store';
+	import { weeksStore } from '../../../store';
 	import ThemeToggleButton from './ThemeToggleButton.svelte';
 	import { Separator } from '$lib/components/ui/separator/index.js';
 	import { ScrollArea } from '$lib/components/ui/scroll-area/index.js';

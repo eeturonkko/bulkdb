@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { ScrollText } from 'lucide-svelte';
-	import Label from './ui/label/label.svelte';
-	import Input from './ui/input/input.svelte';
+	import Label from '../ui/label/label.svelte';
+	import Input from '../ui/input/input.svelte';
 	import * as Sheet from '$lib/components/ui/sheet';
 	import { Button } from '$lib/components/ui/button';
-	import Separator from './ui/separator/separator.svelte';
+	import Separator from '../ui/separator/separator.svelte';
 
 	export let trackedExerciseId: number;
 </script>

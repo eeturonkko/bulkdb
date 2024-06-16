@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { Separator } from '$lib/components/ui/separator';
-	import ExerciseForm from '$lib/components/ExerciseForm.svelte';
-	import TrackingPeriodForm from '$lib/components/TrackingPeriodForm.svelte';
-	import TrackingPeriodTable from '$lib/components/TrackingPeriodTable.svelte';
+	import ExerciseForm from '$lib/components/exercise/ExerciseForm.svelte';
+	import TrackingPeriodForm from '$lib/components/tracking-period/TrackingPeriodForm.svelte';
+	import TrackingPeriodTable from '$lib/components/tracking-period/TrackingPeriodTable.svelte';
 
 	export let data;
 	$: trackingPeriods = data.trackingPeriods;

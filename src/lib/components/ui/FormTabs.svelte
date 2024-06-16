@@ -1,7 +1,7 @@
 <script lang="ts">
 	import * as Tabs from '$lib/components/ui/tabs';
-	import WeekForm from './WeekForm.svelte';
-	import WeightForm from './WeightForm.svelte';
+	import WeekForm from '../week/WeekForm.svelte';
+	import WeightForm from '../weight/WeightForm.svelte';
 </script>
 
 <Tabs.Root value="week" class="w-[400px]">

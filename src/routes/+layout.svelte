@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '../app.pcss';
-	import Sidebar from '$lib/components/Sidebar.svelte';
+	import Sidebar from '$lib/components/ui/Sidebar.svelte';
 	import { ModeWatcher } from 'mode-watcher';
 	import type { LayoutData } from './$types';
 	import { weeksStore } from '../store';

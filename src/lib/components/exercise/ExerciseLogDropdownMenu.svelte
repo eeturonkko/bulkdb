@@ -16,7 +16,6 @@
 					<button type="submit">Modify</button>
 				</form>
 			</DropdownMenu.Item>
-
 			<DropdownMenu.Item>
 				<form use:enhance method="post" action="?/removeTrackedExercise">
 					<input type="hidden" name="id" value={trackedExerciseId} />

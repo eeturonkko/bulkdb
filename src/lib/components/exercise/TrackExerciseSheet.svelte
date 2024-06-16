@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import Label from './ui/label/label.svelte';
+	import Label from '../ui/label/label.svelte';
 	import type { Exercise } from '$lib/db/schema';
 	import * as Sheet from '$lib/components/ui/sheet';
 	import { Button } from '$lib/components/ui/button';
-	import Separator from './ui/separator/separator.svelte';
+	import Separator from '../ui/separator/separator.svelte';
 
 	export let exercises: Exercise[];
 	export let trackingPeriodId: number;

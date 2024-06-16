@@ -2,10 +2,10 @@
 	import type { PageData } from './$types';
 	import { Badge } from '$lib/components/ui/badge';
 	import * as Table from '$lib/components/ui/table';
-	import WeightChange from '$lib/components/WeightChange.svelte';
-	import WeekComments from '$lib/components/WeekComments.svelte';
-	import WeekDropdownMenu from '$lib/components/WeekDropdownMenu.svelte';
-	import WeightDropdowMenu from '$lib/components/WeightDropdowMenu.svelte';
+	import WeightChange from '$lib/components/weight/WeightChange.svelte';
+	import WeekComments from '$lib/components/week/WeekComments.svelte';
+	import WeekDropdownMenu from '$lib/components/week/WeekDropdownMenu.svelte';
+	import WeightDropdowMenu from '$lib/components/weight/WeightDropdowMenu.svelte';
 	import { calculateDifferences, formatDate } from '$lib/utils/functions';
 
 	export let data: PageData;
