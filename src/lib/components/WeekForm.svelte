@@ -8,7 +8,7 @@
 <div class="rounded-lg px-6 shadow-md">
 	<form use:enhance class="space-y-4 py-6" action="?/addNewWeek" method="post">
 		<div class="space-y-4 text-start">
-			<h2 class="text-lg font-medium">Create New week for tracking</h2>
+			<h2 class="text-lg font-medium">Create new week for tracking</h2>
 			<div class="space-y-4">
 				<Label for="week">Name for the week</Label>
 				<Input required name="week" id="week" placeholder="Week 1 etc..." type="text" />

@@ -7,8 +7,9 @@
 </svelte:head>
 
 <div class="flex flex-col items-center text-center tracking-wide">
-	<div class="text-start">
-		<h1 class="mb-4 text-start text-3xl font-bold">Welcome to Bulkdb!</h1>
+	<div class="mb-4">
+		<h1 class="text-3xl font-bold">Welcome to Bulkdb!</h1>
+		<p class=" text-lg">Track, analyze and improve your workouts and diet with Bulkdb.</p>
 	</div>
 	<FormTabs />
 </div>
