@@ -4,27 +4,22 @@
 	import { formatDate } from '$lib/utils/functions';
 	import * as Table from '$lib/components/ui/table';
 	import LogExerciseSheet from './LogExerciseSheet.svelte';
+	import { Separator } from '$lib/components/ui/separator';
 	import * as Accordion from '$lib/components/ui/accordion';
 
 	export let trackedExercises: trackedExercise[];
 	export let exerciseLogs: ExerciseLog[];
-
-	// Split exercises into two halves for rendering in two sections
-	$: half = Math.ceil(trackedExercises.length / 2);
-	$: firstHalf = trackedExercises.slice(0, half);
-	$: secondHalf = trackedExercises.slice(half);
-
-	console.log(exerciseLogs);
 </script>
 
-<div class="flex gap-6">
+<div class="grid grid-cols-2 gap-6">
 	<section class="flex-1">
-		{#each firstHalf as { exerciseName, description, trackedExerciseId }}
+		{#each trackedExercises.filter((_, index) => index % 2 === 0) as { exerciseName, description, trackedExerciseId }}
 			<Accordion.Root>
 				<Accordion.Item value={exerciseName}>
 					<Accordion.Trigger>{exerciseName}</Accordion.Trigger>
 					<Accordion.Content>
 						<LogExerciseSheet {trackedExerciseId} />
+						<Separator class="mt-2" />
 						<Table.Root>
 							<Table.Caption class="text-start">{description}</Table.Caption>
 							<Table.Header>
@@ -54,7 +49,7 @@
 		{/each}
 	</section>
 	<section class="flex-1">
-		{#each secondHalf as { exerciseName, description, trackedExerciseId }}
+		{#each trackedExercises.filter((_, index) => index % 2 !== 0) as { exerciseName, description, trackedExerciseId }}
 			<Accordion.Root>
 				<Accordion.Item value={exerciseName}>
 					<Accordion.Trigger>{exerciseName}</Accordion.Trigger>

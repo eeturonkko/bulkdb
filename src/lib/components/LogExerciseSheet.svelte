@@ -12,7 +12,7 @@
 
 <Sheet.Root>
 	<Sheet.Trigger>
-		<div class="flex items-center gap-2">
+		<div class="flex cursor-pointer items-center gap-2 rounded-lg border border-primary px-4 py-1">
 			<ScrollText size={14} />
 			<span>Log</span>
 		</div>
