@@ -26,7 +26,6 @@
 								<Table.Row>
 									<Table.Head>Weight</Table.Head>
 									<Table.Head>Reps</Table.Head>
-									<Table.Head>Sets</Table.Head>
 									<Table.Head>Date</Table.Head>
 								</Table.Row>
 							</Table.Header>
@@ -36,7 +35,6 @@
 										<Table.Row>
 											<Table.Cell>{log.weight} kg</Table.Cell>
 											<Table.Cell>{log.reps}</Table.Cell>
-											<Table.Cell>{log.sets}</Table.Cell>
 											<Table.Cell>{formatDate(log.date)}</Table.Cell>
 										</Table.Row>
 									{/if}
@@ -61,7 +59,6 @@
 								<Table.Row>
 									<Table.Head>Weight</Table.Head>
 									<Table.Head>Reps</Table.Head>
-									<Table.Head>Sets</Table.Head>
 									<Table.Head>Date</Table.Head>
 								</Table.Row>
 							</Table.Header>
@@ -71,7 +68,6 @@
 										<Table.Row>
 											<Table.Cell>{log.weight} kg</Table.Cell>
 											<Table.Cell>{log.reps}</Table.Cell>
-											<Table.Cell>{log.sets}</Table.Cell>
 											<Table.Cell>{formatDate(log.date)}</Table.Cell>
 										</Table.Row>
 									{/if}
