@@ -43,10 +43,18 @@ export const newLoggedExerciseFormSchema = z.object({
 	sets: z.number(),
 	date: z.date()
 });
+
+export const editTrackingPeriodFormSchema = z.object({
+	periodId: z.number(),
+	periodName: z.string().min(2).max(50).optional(),
+	endDate: z.date().optional()
+});
+
 export type ValidateId = typeof validateId;
 export type ValidateComment = typeof validateComment;
 export type NewWeekFormSchema = typeof newWeekFormSchema;
 export type NewExerciseFormSchema = typeof newExerciseFormSchema;
 export type NewDailyWeightFormSchema = typeof newDailyWeightFormSchema;
 export type NewTrackingPeriodFormSchema = typeof newTrackingPeriodFormSchema;
+export type EditTrackingPeriodFormSchema = typeof editTrackingPeriodFormSchema;
 export type NewTrackedExerciseFormSchema = typeof newTrackedExerciseFormSchema;

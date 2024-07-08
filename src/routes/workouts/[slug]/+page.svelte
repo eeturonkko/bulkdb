@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { formatDate } from '$lib/utils/functions.js';
+
 	import Separator from '$lib/components/ui/separator/separator.svelte';
 	import ExecrciseAccordion from '$lib/components/exercise/ExecrciseAccordion.svelte';
 	import TrackExerciseSheet from '$lib/components/exercise/TrackExerciseSheet.svelte';
+	import TrackingPeriodEditForm from '$lib/components/tracking-period/TrackingPeriodEditForm.svelte';
 
 	export let data;
 	$: trackingPeriod = data.trackingPeriod[0];
@@ -25,7 +27,10 @@
 					: 'Present'}
 			</p>
 		</div>
-		<TrackExerciseSheet {exercises} trackingPeriodId={trackingPeriod.periodId} />
+		<div class="flex items-start gap-2">
+			<TrackingPeriodEditForm {trackingPeriod} />
+			<TrackExerciseSheet {exercises} trackingPeriodId={trackingPeriod.periodId} />
+		</div>
 	</section>
 	<Separator />
 	<h2 class="font-semibold md:text-2xl">Tracked Exercises</h2>

@@ -7,6 +7,7 @@ import { trackingPeriods, exercises, trackedExercises, exerciseLogs } from '$lib
 import {
 	newTrackedExerciseFormSchema,
 	newLoggedExerciseFormSchema,
+	editTrackingPeriodFormSchema,
 	validateId
 } from '$lib/formSchema';
 
@@ -94,6 +95,26 @@ export const actions: Actions = {
 					stack: error.stack
 				});
 				return { status: 500, error: 'Failed to remove exercise' };
+			}
+		}
+	},
+	editTrackingPeriod: async (event) => {
+		const form = await superValidate(event, zod(editTrackingPeriodFormSchema));
+		const { periodId, periodName, endDate } = form.data;
+		try {
+			await db
+				.update(trackingPeriods)
+				.set({ periodName, endDate })
+				.where(eq(trackingPeriods.periodId, periodId));
+		} catch (error) {
+			console.error('Error editing tracking period:', error);
+			if (error instanceof Error) {
+				console.error('Error details:', {
+					message: error.message,
+					name: error.name,
+					stack: error.stack
+				});
+				return { status: 500, error: 'Failed to edit tracking period' };
 			}
 		}
 	}
