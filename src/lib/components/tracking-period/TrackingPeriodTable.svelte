@@ -23,12 +23,11 @@
 				<Table.Row>
 					<Table.Cell>{period.periodName}</Table.Cell>
 					<Table.Cell>{period.startDate.toLocaleDateString()}</Table.Cell>
-					<Table.Cell
-						>{period.endDate ? period.endDate.toLocaleDateString() : 'End date not set'}</Table.Cell
+					<Table.Cell>{period.endDate ? period.endDate.toLocaleDateString() : 'Present'}</Table.Cell
 					>
 					<Table.Cell>
 						<Button>
-							<a href={`/workouts/${period.periodId}`}> View/Edit </a>
+							<a href={`/workouts/${period.periodId}`}> View</a>
 						</Button>
 					</Table.Cell>
 				</Table.Row>

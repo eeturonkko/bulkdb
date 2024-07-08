@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Ellipsis } from 'lucide-svelte';
 	import type { trackedExercise } from '$lib/types';
 	import type { ExerciseLog } from '$lib/db/schema';
 	import { formatDate } from '$lib/utils/functions';
@@ -7,7 +8,6 @@
 	import { Separator } from '$lib/components/ui/separator';
 	import * as Accordion from '$lib/components/ui/accordion';
 	import ExerciseLogDropdownMenu from './ExerciseLogDropdownMenu.svelte';
-	import { Ellipsis } from 'lucide-svelte';
 
 	export let trackedExercises: trackedExercise[];
 	export let exerciseLogs: ExerciseLog[];
