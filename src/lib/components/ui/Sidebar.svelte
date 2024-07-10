@@ -3,7 +3,7 @@
 </script>
 
 <aside>
-	<nav class="flex flex-col items-center gap-4 py-8 sm:py-5">
+	<nav class="flex flex-col items-center gap-4">
 		<Navlist />
 	</nav>
 </aside>

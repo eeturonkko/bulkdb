@@ -16,7 +16,7 @@
 <ModeWatcher />
 <div class="flex min-h-screen w-full flex-col bg-muted/40">
 	<Sidebar />
-	<main class="container">
+	<main class="container my-7">
 		<slot></slot>
 	</main>
 </div>
