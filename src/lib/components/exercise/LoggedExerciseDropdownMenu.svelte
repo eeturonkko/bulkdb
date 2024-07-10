@@ -13,7 +13,7 @@
 			<DropdownMenu.Item>
 				<form use:enhance method="post" action="?/removeLoggedExercise">
 					<input type="hidden" name="id" value={loggedExerciseId} />
-					<button type="submit">Remove exercise</button>
+					<button type="submit">Remove log</button>
 				</form>
 			</DropdownMenu.Item>
 		</DropdownMenu.Group>
