@@ -117,5 +117,23 @@ export const actions: Actions = {
 				return { status: 500, error: 'Failed to edit tracking period' };
 			}
 		}
+	},
+	removeLoggedExercise: async (event) => {
+		const form = await superValidate(event, zod(validateId));
+		const { id } = form.data;
+		try {
+			await db.delete(exerciseLogs).where(eq(exerciseLogs.logId, id));
+			return { status: 200, message: 'Exercise log removed successfully' };
+		} catch (error) {
+			console.error('Error removing logged exercise:', error);
+			if (error instanceof Error) {
+				console.error('Error details:', {
+					message: error.message,
+					name: error.name,
+					stack: error.stack
+				});
+				return { status: 500, error: 'Failed to remove exercise log' };
+			}
+		}
 	}
 };

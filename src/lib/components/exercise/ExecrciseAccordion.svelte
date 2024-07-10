@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { Ellipsis } from 'lucide-svelte';
 	import type { trackedExercise } from '$lib/types';
 	import type { ExerciseLog } from '$lib/db/schema';
 	import { formatDate } from '$lib/utils/functions';
@@ -8,6 +7,7 @@
 	import { Separator } from '$lib/components/ui/separator';
 	import * as Accordion from '$lib/components/ui/accordion';
 	import ExerciseLogDropdownMenu from './ExerciseLogDropdownMenu.svelte';
+	import LoggedExerciseDropDownMenu from './LoggedExerciseDropdownMenu.svelte';
 
 	export let trackedExercises: trackedExercise[];
 	export let exerciseLogs: ExerciseLog[];
@@ -43,7 +43,7 @@
 											<Table.Cell>{log.reps}</Table.Cell>
 											<Table.Cell>{formatDate(log.date)}</Table.Cell>
 											<Table.Cell>
-												<Ellipsis />
+												<LoggedExerciseDropDownMenu loggedExerciseId={log.logId} />
 											</Table.Cell>
 										</Table.Row>
 									{/if}
@@ -82,6 +82,9 @@
 											<Table.Cell>{log.weight} kg</Table.Cell>
 											<Table.Cell>{log.reps}</Table.Cell>
 											<Table.Cell>{formatDate(log.date)}</Table.Cell>
+											<Table.Cell>
+												<LoggedExerciseDropDownMenu loggedExerciseId={log.logId} />
+											</Table.Cell>
 										</Table.Row>
 									{/if}
 								{/each}
